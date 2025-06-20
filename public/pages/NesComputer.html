@@ -1,0 +1,135 @@
+<div class="w3-container w3-animate-opacity">
+
+  <div class="w3-panel w3-light-grey w3-leftbar w3-border-blue-grey">
+    <p>Draft project of a kit to turn an old NES console into a computer</p>
+  </div>
+  
+  <div class="w3-container">
+
+    <p>
+      One thing that I never understood well (*): why there weren't a way to turn the old videogame consoles into computers (**).
+      I mean, computers on the 80's were expansive, very expansive. Why not put a game console and a computer together?
+      That would be a great cost optimization.
+    </p>
+    <p>
+      So I started to think: what if the NES had a kit to turn it into an 8-bit computer, such as the computers of the era, like the C64.
+    </p>
+    <p>
+      And then I made a small plan, much on the style Arne Niklas Jansson made 
+      <a href="http://androidarts.com/Amiga/MSX.htm" target="_blank" rel="noreferrer">here</a>, 
+      <a href="http://androidarts.com/Amiga/ZX.htm" target="_blank" rel="noreferrer">here</a> and 
+      <a href="http://androidarts.com/SEGA/SEGAcube.htm" target="_blank" rel="noreferrer">here</a>.
+      Of course I lack the artistic skills, but I decided to write this down, to organize some ideas I had:
+    </p>
+    <p>
+      First things first: why NES? Why not SNES, PS1? Because on the NES era, the computers (even home computers) were more expansive, and
+      it makes more economical sense to be done with a NES than with an further console, of an era when the computer prices already dropped a lot.
+    </p>
+    <p>
+      I will adopt the premise of an unlicensed add on to NES, launched a little after the console, so we are talking about the year of 1986.
+    </p>
+    <p>
+      My first idea was to make a cartridge with socket for a keyboard. Cartriges are not only for software, they can be used for hardware expansions too, 
+      as any MSX owner knows very well. This option has the obvious downside of the need to keep the NES cart door open. The advantage would be the 
+      possibility of using any commercial standard keyboard, but on that time there weren't a keyboard standard as the de facto standard, as 
+      today we have USB, and before the PS/2.
+    </p>
+    <p>
+      So I think: the nes controller works on a serial way: it transfers a byte each cycle, and each bit represents the state of a single button 
+      (the directional pad is in reality 4 buttons). I can use a combination of these buttons for each key of the keyboard.
+      Even better: I can use invalid combinations (it's mechanically impossible to press up and down at same time, for example) as keys.
+      I decided to use this approach.
+    </p>
+    <p>
+      We have 7 invalid directional states:
+      <ul>
+        <li>all four directions pressed</li>
+        <li>3 directions pressed (that is, four kinds of this one)</li>
+        <li>up an down</li>
+        <li>left and right</li>
+      </ul>
+    </p>
+    <p>
+      We need at least one key to be possible to use in combination with others, I chose the Shift key.
+    </p>
+    <p>
+      I have the premise that the keyboard should be able to be used as an ordinary controller, and the constroller should be able to be used as a keyboard
+      (of course only the direcion keys and some few others):
+      <ul>
+        <li>Arrow keys will be equivalent to gamepad directions</li>
+        <li>The Enter key will be the same as Start button</li>
+        <li>Shift is Select button</li>
+        <li>A and B buttons I haven't decided yet</li>
+      </ul>
+    </p>
+    
+    <div class="w3-margin">
+      <div class="w3-card-4" style="width:100%">
+        <img src="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2FSony%20HB-F700.jpg?v=1597535177934" 
+             alt="Sony HB-F700" style="width:100%">
+        <div class="w3-container w3-center">
+          <p>Japanese Sony HB-F700 MSX computer, released on 1986. This keyboard would be perfect for the NES computer with few adaptations.</p>
+        </div>
+      </div>
+    </div>
+    
+    <p>
+      The above keyboard, from a Sony MSX computer would be great fit for this project, with minor changes, such as arrow keys moved to under
+      the numeric pad, for better gaming experience.
+    </p>
+    <p>
+      (*) Yes, I know the target audience of game consoles and home computers were distinct, being games more for children and computers more for teenagers and 
+      young people, but given the huge market the consoles had, even the small overlap between these two demographics could be an attractive niche.
+      I know also that console makers such as Nintendo and Sega had zero interest to do this, that's why I think of an independent hardware maker 
+      (Nintendo wouldn't be very happy and some legal battle would happen).
+    </p>
+    <p>
+      As for the software side, it's unclear for me: just an BASIC intepreter like the computers of the era, or an small operating system with utilities
+      such as calendar, notepad, calc, a simple spreadsheet.
+    </p>
+    <p>
+      Some kind of battery backed memory on the cart would be necessary, to save programs and data.
+    </p>
+
+    <p>
+      Printer port, monitor output, and even a 3" 1/2 disk drive would be possible to be attached on the NES expansion port at the bottom:
+    </p>
+
+    <div class="w3-margin">
+      <div class="w3-card-4" style="width:100%">
+        <img src="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fnes%20computer%20draft.jpg?v=1597546980116" 
+             alt="nes computer draft" style="width:100%">
+        <div class="w3-container w3-center">
+          <p>Nes computer draft. This unit would be attached to the botton expansion port of NES and possibly be an optional item.</p>
+        </div>
+      </div>
+    </div>
+    
+    <p>
+      (**) Actually I find this <a href="https://www.youtube.com/watch?v=uUsL7qI_GTs&t=1115s" target="_blank" rel="noreferrer">one</a>, 
+      for Atari 2600. Keyboard attached on cartridge, as my first idea. Cool.
+    </p>
+
+    <p>
+      I also discovered later this official prototype from a Sega Mega Drive/Genesis computer, never launched: 
+      <a href="https://mdshock.com/2018/07/15/the-mega-drive-has-launched/" target="_blank" rel="noreferrer">link here</a>.
+    </p>
+
+    <p>
+      Some fellows of MRC also pointed out many other console-computers 
+      <a href="https://www.msx.org/forum/msx-talk/hardware/strange-frankestein-hardware-turn-sms-computer?page=5" target="_blank" rel="noreferrer">here</a>, 
+      even a cool Japanese Famicom with BASIC.
+    </p>
+
+    <p>
+      Thanks for reading.
+    </p>
+
+    <p>
+      <i class="fa fa-calendar"></i>
+      Published on: <b>Aug 15th, 2020</b><!--, updated: <b>February 6th, 2019</b>-->
+    </p>
+
+  </div>
+  
+</div>

@@ -1,0 +1,107 @@
+<div class="w3-container w3-animate-opacity">
+
+  <div class="w3-panel w3-light-grey w3-leftbar w3-border-blue-grey">
+    <p>My adventures on GB development</p>
+  </div>
+  
+  <div class="w3-container">
+              
+    <p>
+      Around a month ago I got myself fully absorbed by a new and strange hobby: to make homebrew games for the original Gameboy (that brick model from 1989).
+      It's very unusual since I never had one back in the day (they were imported and VERY expansive that time on Brazil). I didn't even saw one live.
+    </p>
+      
+    <p>
+      Well, I don't know exactly how, but I started to eagerly read all documentation about its hardware (like 
+      <a href="https://gbdev.io/pandocs/">this</a>, 
+      <a href="https://gb-archive.github.io/salvage/tutorial_de_ensamblador/tutorial_de_ensamblador%20%5BLa%20decadence%5D.html">this</a>, 
+      and <a href="https://eldred.fr/gb-asm-tutorial/introduction.html">this</a>) and see YT videos on the subject (like 
+      <a href="https://www.youtube.com/watch?v=HyzD8pNlpwI">this great presentation</a>, 
+      <a href="https://www.youtube.com/watch?v=RZUDEaLa5Nw">this</a> and 
+      <a href="https://www.youtube.com/watch?v=zQE1K074v3s">this</a>).
+      And the fact is I have much fun by doing retro programming, getting to know more deeply 
+      about specifics of the hardware and the history involved with them. Next victims will possibly be 
+      <a href="https://mynameismjp.wordpress.com/2019/01/14/adventures-in-retro-development-snes-edition/">SNES</a> and 
+      <a href="https://www.smspower.org/maxim/HowToProgram/Index">Master System</a>, or any other 8/16 bits cool platform.
+    </p>
+
+    <p>
+      I quickly setup an enviroment using VS Code, rgbasm, Gameboy Tile Designer, and BGB/Emulicious emulators. This was a matter of a couple hours, great 
+      improvement over the 2 days I spent between setting an environment and making the first Hello World works on MSX. Experience with retro development 
+      starts to paying off. The help of community, as always, is invaluable, like <a href="https://gbdev.gg8.se/forums/viewtopic.php?pid=4593#p4593">here</a>.
+    </p>
+    
+    <div class="w3-margin">
+      <div class="w3-card-4" style="width:100%">
+        <img src="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fparanoid%20gb%20environment.jpg?v=1608247424795" 
+             alt="Paranoid for GB pic" style="width:100%">
+        <div class="w3-container w3-center">
+          <p>Development tools.</p>
+        </div>
+      </div>
+    </div>
+  
+    <p>GB technical specs:
+      <ul>
+        <li>160x144 pixels screen (20x18 tiles of 8x8)</li>
+        <li>4 "colors" (actually 4 shades of gray)</li>
+        <li>40 sprites on screen, max 10 per scanline</li>
+        <li>sprites can be 8x8 or 8x16, have 3 colors</li>
+        <li>sprites also can be inverted both horizontally and vertically</li>
+        <li>tiles and sprites share the same char map (there is a trick here)</li>
+        <li>background and window layers</li>
+        <li>hw scroll for background, (bg are scrollable independently of window, which itself is adequate to score/lives/other fixed stuff)</li>
+      </ul>
+    </p>
+  
+    <p>
+      The GB has a CPU much close of Z80, most instructions are equal, so the learning curve on this aspect isn't so steep. On the other hand the PPU is 
+      much different of the TMS9918 that I am used so far.
+    </p>
+  
+    <p>
+      As Proof of Concept I am doing a simple game called Paranoid (github <a href="https://github.com/albs-br/paranoid">here</a>), a sort of 
+      Arkanoid/Breakout clone:
+    </p>
+
+    <div class="w3-margin">
+      <div class="w3-card-4" style="width:100%">
+        <img src="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fparanoid%20screen%201.png?v=1608248659784" 
+             alt="Paranoid for GB pic" style="width:100%">
+        <div class="w3-container w3-center">
+          <p>Screenshot of the game running on BGB emulator.</p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="w3-margin">
+      <div class="w3-card-4" style="width:100%">
+        <div class="iframe-container">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/5ks1Bf9HxOY" frameborder="0" 
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="w3-container w3-center">
+          <p>Video of Paranoid, tech demo for Gameboy</p>
+        </div>
+      </div>
+    </div>
+  
+    <p>
+      While learning new features I am putting them on the game, such as: using the interruptions for split the window top and bottom, doubling the 
+      sprites (that's a cool trick, by doing this you can put 80 or even more sprites on screen at same time). And even simple things like a game loop 
+      V-blank synced, which I still don't know on MSX. Sometimes you need to go to another platform to get a different view, and learn a new way/better 
+      of make something you thought you knew.
+    </p>
+
+    <p>
+      Thanks for reading.
+    </p>
+
+    <p>
+      <i class="fa fa-calendar"></i>
+      Published on: <b>Dec 17th, 2020</b>, updated: <b>Apr 22th, 2021</b>
+    </p>
+
+  </div>
+  
+</div>

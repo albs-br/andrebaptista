@@ -1,0 +1,95 @@
+<div class="w3-container w3-animate-opacity">
+
+  <div class="w3-panel w3-light-grey w3-leftbar w3-border-blue-grey">
+    <p>Draft specification for the ultimate 8-bit era VDP</p>
+  </div>
+  
+  <div class="w3-container">
+              
+    <p>
+      While doing homebrew games for MSX 1, I often got frustrated by the limitation of its TMS 9918 VDP (Video Display Processor).
+      Of course there were constraints given the age of machine, but it seems for me it could be better, even at that time.
+    </p>
+      
+    <!-- Sample of hyperlink to make it easier to create new pages -->
+    <!--a href="">this</a-->
+    
+    <p>
+      So I started to think of a VDP with the same 16 KiB of VRAM, mixing features of the VDPs of Gameboy, MSX 1 and 2, NES, Master 
+      System and many others. (*)
+    </p>
+
+    <p>
+      The specs I thought were these:
+    </p>
+    
+    <p><b>Names table structure:</b>
+      <ul>
+        <li>screen has 256 x 192 pixels, 32 x 24 tiles of 8x8</li>
+        <li>2 bytes per char = 32 x 24 x 2 = <b>1536 bytes</b></li>
+        <li>9 bits pattern</li>
+        <li>horiz reverse</li>
+        <li>vert reverse</li>
+        <li>background/foreground</li>
+        <li>4 bits palette selection</li>
+      </ul>
+    </p>
+      
+    <div class="w3-margin">
+      <div class="w3-card-4" style="width:100%">
+        <img src="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2F8%20bit%20vdp.png?v=1608500630356" 
+             alt="8 bit VDP names table format pic" style="width:100%">
+        <div class="w3-container w3-center">
+          <p>Names table format. Same for sprite attibutes table. Each tile uses 2 bytes, so 2 x 32 x 24 = 1536 bytes</p>
+        </div>
+      </div>
+    </div>
+  
+    <p><b>Sprite attributes table structure:</b>
+      <ul>
+        <li>4 bytes per sprite = 64 x 4 = <b>256 bytes</b></li>
+        <li>2 bytes for x and y coords</li>
+        <li>more 2 bytes for attributes, exactly as names table, except for the bg/fg bit, which is replaced by EC bit 
+          (Early Clock, as in 9918: decreases x by 8 pixels, useful to make the sprite appear pixel by pixel on left border)</li>
+      </ul>
+    </p>
+      
+    <p>
+      <b>Palette table:</b> 16 palettes of 16 colors each, so 16 x 16 = <b>256 bytes</b>
+    </p>
+  
+    <p>
+      Total bytes used by these three tables: 1536 + 256 + 256 = 2048 bytes (2 KiB). Tiles are 8 x 8 x 4bpp, so 32 bytes per tile.
+      The remainder of the 16 KiB (14336 bytes) would be used by the patterns table: 14336 / 32 = 448 patterns available for tiles/sprites
+    </p>
+
+    <p>
+      Any of these 448 tiles can be used both as background/foreground pattern and as sprites. They can assume any of the 16 palettes, making
+      it possible to have the same tiles used for different players/enemies, just changing colors. They can be reversed on both directions too,
+      giving flexibility to create scenarios and sprites facing up/down/left/right.
+    </p>
+
+<p>
+      With these capabilities it looks like graphics of 16-bit era games such as Mario World and Final Fight are perfectly doable. Maybe someday I will make a
+      script to convert some screenshots of these games to these restrictions to confirm the viability.
+    </p>
+  
+    <p>
+      (*) Later I learned (<a href="https://www.msx.org/forum/msx-talk/graphics-and-music/screen-25-mode?page=0">here</a>) that memory wasn't the only restriction,
+      the number of transistors were a huge worry at that time, in fact, the TMS9918 itself had this as a main design goal, as it's stated 
+      <a href="https://www.reddit.com/r/retrogaming/comments/6wosd7/tms9918_designer/">here</a> by it's creator Karl Guttag. Besides this,
+      there were the limitation of bus width.
+    </p>
+
+    <p>
+      Thanks for reading.
+    </p>
+
+    <p>
+      <i class="fa fa-calendar"></i>
+      Published on: <b>Dec 20th, 2020</b><!-- , updated: <b>November 10th, 2020</b-->
+    </p>
+
+  </div>
+  
+</div>

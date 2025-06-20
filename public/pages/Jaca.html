@@ -1,0 +1,172 @@
+<div class="w3-container w3-animate-opacity">
+
+  <div class="w3-panel w3-light-grey w3-leftbar w3-border-blue-grey">
+    <p>JACA stands for Just Another Homebrew CPU Again. It's an 8-bit computer projected and made from scratch
+    just from regular TTL ICs.</p>
+  </div>
+  
+  <div class="w3-container">
+              
+    <div class="w3-margin">
+      <div class="w3-card-4" style="width:100%">
+        <img src="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fjaca%20thumbnail%20peq.jpg?1544474536171" alt="JACA pic" style="width:100%">
+        <div class="w3-container w3-center">
+          <p>Part of the computer built on breadboards</p>
+        </div>
+      </div>
+    </div>
+
+    <p>I've always had the idea of joining my (meager) electronics knowledge with the programming knowledge.
+      To know where is the lost link between the instruction in Assembly language and the logic gates that brings life to it.</p>
+    <p>The project progress is documented on the <a href="https://hackaday.io/project/24511-jaca-1-2-homebrew-computer" target="_blank" rel="noreferrer">Hackaday site.</a></p>
+    <p>I started by doing the logical project on a software called <a href="http://www.cburch.com/logisim/" target="_blank" rel="noreferrer">Logisim</a>. First I've done a small 4 bit CPU as a POC
+      (Proof Of Concept), and then the 8 bit version:</p>
+
+    <div class="w3-margin">
+      <div class="w3-card-4" style="width:100%">
+        <img src="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fjaca%20logisim.png?1544550392535" alt="JACA pic" style="width:100%">
+        <div class="w3-container w3-center">
+          <p>8 bit CPU done on Logisim</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="w3-margin">
+      <div class="w3-card-4" style="width:100%">
+        <div class="iframe-container">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/vN1LSt19SpM" frameborder="0" 
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="w3-container w3-center">
+          <p>Video of the computer simulated on Logisim running some test programs</p>
+        </div>
+      </div>
+    </div>
+    
+    <p>
+      I also made an Assembler program in C#/Windows Forms. An assembler is a program that converts the Assembly language
+      (a mnemonic that is easier for a human to read) in the Machine Code (the zeroes and ones that is effectivelly the 
+      only "language" the computer understands). Here is it:
+    </p>
+  
+    <div class="w3-margin">
+      <div class="w3-card-4" style="width:100%">
+        <img src="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fjaca%20assembler.png?1544551077670" alt="JACA pic" style="width:100%">
+        <div class="w3-container w3-center">
+          <p>Screenshot of the Assembler program</p>
+        </div>
+      </div>
+    </div>
+
+    <p>
+      That was the easy part. So I started building the computer on breadboards, module by module. The first one (the simplest) was very 
+      straightfoward, but as I added more and more modules the problems started to arise. It costed me MONTHS of work until I realized 
+      that with these very poor quality chinese breadboards I wouldn't go nowhere.
+    </p>
+    
+    <div class="w3-margin">
+      <div class="w3-card-4" style="width:100%">
+        <div class="iframe-container">
+          <iframe 
+            src="https://www.youtube.com/embed/lilneAHAH4E" frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="w3-container w3-center">
+          <p>Video of a partial assembly of the computer</p>
+        </div>
+      </div>
+    </div>
+    
+    <p>
+      Then I decided to move on to another approach and rebuilt the computer on Printed Circuit Boards (PCBs), designing the circuits
+      on the <a href="https://easyeda.com" target="_blank" rel="noreferrer">EasyEDA</a> online platform and ordering the PCBs with the <a href="https://jlcpcb.com/" target="_blank" rel="noreferrer">JLC PCB</a>.
+    </p>
+
+    <div class="w3-margin">
+      <div class="w3-card-4" style="width:100%">
+        <img src="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2FSchematic_JACA-2-Registers_JACA-2-Registers---Sheet-1_20181217084402.png?1545043466054" alt="JACA pic" style="width:100%">
+        <div class="w3-container w3-center">
+          <p>One of the schematics on EasyEDA</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="w3-margin">
+      <div class="w3-card-4" style="width:100%">
+        <img src="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fjaca%20pcbs1210781541761251213.jpg?1545043643661" alt="JACA pic" style="width:100%">
+        <div class="w3-container w3-center">
+          <p>Two PCBs</p>
+        </div>
+      </div>
+    </div>
+    
+    <p>
+      <b>Update:</b>
+    </p>
+    
+    <p>
+      Some time ago, I made a javascript emulator for the CPU, I think it's worth to show here:
+    </p>
+    <p>
+      <a href="https://jaca-emulator.stackblitz.io/">Link</a> to the emulator working. Try clicking "Load", then select "Test OUT/SHL/SHR", and click "Play".
+      <br />
+      <a href="https://stackblitz.com/edit/jaca-emulator?file=index.html">Source code.</a>
+    </p>
+    
+    <div class="w3-margin">
+      <div class="w3-card-4" style="width:100%">
+
+        <img src="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fjaca%20emulator.png?v=1585249531568" alt="JACA CPU emulator in Javascript" style="width:100%">
+        
+        <div class="w3-container w3-center">
+          <p>JACA CPU emulator in Javascript</p>
+        </div>
+      </div>
+    </div>
+    
+    <p>
+      Thanks for reading.
+    </p>
+
+    <p>
+      <i class="fa fa-calendar"></i>
+      Published on: <b>December 17th, 2018</b>, updated: <b>March 26th, 2020</b>
+      <!-- updated: <b>February 8th, 2019</b-->
+    </p>
+
+    <div class="w3-margin">
+      <!-- ========================================== -->
+      <!-- Include this code in each page on the Ring -->
+      <!-- $Revision: 1.3 $ $Date: 2017/10/05 04:05:56 $ -->
+      <p/>
+      <center><h2>Homebuilt CPUs WebRing</h2>
+      <p/>
+      <script src="https://www.homebrewcpuring.org/webring.js"
+              language="JavaScript" type="text/javascript" ></script>
+      <form action="https://www.homebrewcpuring.org/webring.js" name="ring" id="ring">
+      <input type="button" value="Ring-Home" onclick="ringhome()" />
+      <input type="button" value="Previous"  onclick="previous()" />
+      <input type="button" value="Next"      onclick="next()" />
+      <input type="button" value="Random"    onclick="random()" />
+      </form>
+      </center>
+      <p/>
+      <center>JavaScript by <a href="mailto:qirien@earthling.net">Qirien Dhaela</a></center>
+      <p/>
+      <h3>Join the ring?</h3>
+      To join the Homebuilt CPUs ring, drop Warren <a href="mailto:cpuring@tuhs.org">a line</a>,
+      mentioning your page's URL. He'll then add it to the list.
+      <br/>
+      You will need to copy this code fragment into your page (or reference it.) <br/>
+      <i>Note</i>: The ring is chartered for projects that include a home-built
+      CPU. It can emulate a commercial part, that&prime;s OK. But actually using that
+      commercial CPU doesn&prime;t rate. Likewise, the project must have been
+      at least partially built: pure paper designs don&prime;t rate either. 
+      It can be built using any technology you like, from relays to FPGAs.
+      <!-- End of code fragment, in all ring pages.   -->
+      <!-- ========================================== -->
+    </div>
+
+  </div>
+  
+</div>

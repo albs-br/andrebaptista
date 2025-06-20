@@ -1,0 +1,111 @@
+<div class="w3-container w3-animate-opacity">
+
+  <!-- div class="w3-panel w3-light-grey w3-leftbar w3-border-blue-grey">
+    <p>Live For Speed (LFS) is a racing simulator for PC released many years ago, but still great,
+      thanks to the accuracy in simulation, despite somewhat outdated graphics (who cares?).</p>
+  </div-->
+  
+  <div class="w3-container">
+              
+    <!--div class="w3-margin">
+      <div class="w3-card-4" style="width:100%">
+        <img src="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fsql%20join%20gen.png?1544614852759" alt="SQL Join Generator pic" style="width:100%">
+        <div class="w3-container w3-center">
+          <p>Screenshot of the program.</p>
+        </div>
+      </div>
+    </div-->
+
+    
+    <div class="w3-panel w3-light-grey w3-leftbar w3-border-blue-grey">
+      <p>
+      About this web site (very beta)
+      </p>
+    </div>
+
+    
+    Version: <div id="aboutVersion"></div>
+    
+    <!--
+    Location testing: <div id="location"></div>
+    -->
+
+    <p>
+      Some performance and security benchmark scores for this website:
+    </p>
+
+    <div class="w3-margin">
+      <div class="w3-card-4" style="width:100%">
+        <img src="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Flighthouse.png?v=1560961225800" alt="Lighthouse score" style="width:100%">
+        <div class="w3-container w3-center">
+          <p>Lighthouse score (hit F12 key and go to the Audit tab on Chrome).</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="w3-margin">
+      <div class="w3-card-4 w3-center" style="width:100%">
+        <a href="https://securityheaders.com/?q=https%3A%2F%2Fwww.andrebaptista.com.br%2F&followRedirects=on" target="_blank" rel="noreferrer">
+          <img src="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fsec%20headers.png?v=1560961225442" alt="Security Headers score" style="width:60%">
+        </a>
+        <div class="w3-container w3-center">
+          <p>Security Headers score (click to see live).</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="w3-margin">
+      <div class="w3-card-4 w3-center" style="width:100%">
+        <img src="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fwebpagetest.png?v=1560961225646" alt="WebPageTest score" style="width:60%">
+        <div class="w3-container w3-center">
+          <p>WebPageTest score (as of June 19th, 2019).</p>
+        </div>
+      </div>
+    </div>
+    
+    <!--div class="w3-row">
+      <div class="w3-col l12 m12 s12">
+        <img src="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Flighthouse.png?v=1560961225800" alt="Lighthouse score" style="width:100%"/>
+      </div>
+      <div class="w3-col l12 m12 s12">
+        <img src="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fsec%20headers.png?v=1560961225442" alt="Security Headers score" style="width:60%"/>
+      </div>
+      <div class="w3-col l12 m12 s12">
+        <img src="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fwebpagetest.png?v=1560961225646" alt="Security Headers score" style="width:60%"/>
+      </div>
+    </div-->
+    
+    <p>
+      Powered by:
+    </p>
+    <ul>
+      <li>Glitch</li>
+      <li>Node.js</li>
+      <li>Express.js</li>
+      <li>Fly.io</li>
+      <li>W3.CSS</li>
+      <li>Jquery</li>
+      <li>Font Awesome</li>
+    </ul>
+    
+    <script>
+      
+    $(() => {
+      $('#aboutVersion').text(VERSION);
+
+      /*
+      if ('geolocation' in navigator) {
+          navigator.geolocation.getCurrentPosition(function (location) {
+            $('#location').text(location.coords.latitude + ', ' + location.coords.longitude);
+          });
+      }
+      else {
+        $('#location').text('Geolocation API not supported.');
+      }
+      */
+    });
+      
+    </script>
+    
+  </div>
+</div>

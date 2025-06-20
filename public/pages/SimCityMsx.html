@@ -1,0 +1,119 @@
+<div class="w3-container w3-animate-opacity">
+
+  <div class="w3-panel w3-light-grey w3-leftbar w3-border-blue-grey">
+    <p>Port of the classic SimCity (based on SNES version) to MSX 1.</p>
+  </div>
+  
+  <div class="w3-container">
+              
+    <div class="w3-margin">
+      <div class="w3-card-4" style="width:100%">
+        <img src="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fsc.png?v=1592326394805" 
+             alt="Sim City for MSX pic" style="width:100%">
+        <div class="w3-container w3-center">
+          <p>Screenshot of very beta version. Right bottom corner is a small debug info. Scanlines and gaussian blur set to mimic an old CRT TV.</p>
+        </div>
+      </div>
+    </div>
+
+    <p>After more than 25 years, I'm again programming a MSX! Suddenly I had an idea when reading something about the 
+      unreleased NES version of SimCity: what if I tried to squeeze this great game into the huge MSX 1 video restrictions? 
+      To make things even worse, what if I use MS-BASIC?
+    </p>
+      
+    <p>
+      The MSX 1 hardware specs on a glance (screen 2):
+      <ul>
+        <li>256 x 192 pixels;</li>
+        <li>only 16 colors (more on this later);</li>
+        <li>a fair amount of sprites: 256 (8x8) or 64 (16x16), 32 on screen simultaneously, but only 4 on the same line;</li>
+        <li>just one color per sprite.</li>
+      </ul>
+    </p>
+
+    <p>As if 16 colors weren't enougth constraint, the palette choice is somewhat peculiar, for example there are two  almost equal 
+      green shades, same as the two yellows, the only grey is very close to white... And things get worse: you cannot color each pixel 
+      individually, you have to take account of the neighborhood, each group of 8 pixels can only has two colors: foreground and background, 
+      if you try to add a third it replaces the color before (attribute clashing). This is a compromise necessary due to the tiny 16kb of 
+      memory (back in the 80's memory were very expansive).
+    </p>
+  
+    <p>Due to the grid nature of SimCity graphics (think of the first version, for SNES) I thought it could fit within these restrictions.
+    </p>
+
+    <p>I'm using an emulator (openMSX) and coding on Visual Studio Code with Tandy Color Basic extension to syntax highlighting.
+    </p>
+
+    <p>
+      <b>Update on June 18th, 2020:</b>
+    </p>
+    
+    <p>
+      I'm very interested on this subject, eagerly reading (actually re-reading) books such as:
+      <div class="w3-row">
+        <div class="w3-col l4 m4 s6">
+          <div class="w3-container">
+            <img src="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fprog%20avan.PNG?v=1592527688087" class="msx-book" alt="MSX book cover pic" width="100%" /> 
+          </div>
+        </div>
+        <div class="w3-col l4 m4 s6">
+          <div class="w3-container">
+            <img src="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2F100dicas.PNG?v=1592527688233" class="msx-book" alt="MSX book cover pic"  width="100%" /> 
+          </div>
+        </div>
+        <div class="w3-col l4 m4 s6">
+          <div class="w3-container">
+            <img src="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2F50dicas.PNG?v=1592527689090" class="msx-book" alt="MSX book cover pic"  width="100%" /> 
+          </div>
+        </div>
+        <div class="w3-col l4 m4 s6">
+          <div class="w3-container">
+            <img src="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fling%20maq.PNG?v=1592527689626" class="msx-book" alt="MSX book cover pic"  width="100%" /> 
+          </div>
+        </div>
+        <div class="w3-col l4 m4 s6">
+          <div class="w3-container">
+            <img src="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fprog%20para.PNG?v=1592527689777" class="msx-book" alt="MSX book cover pic"  width="100%" /> 
+          </div>
+        </div>
+        <div class="w3-col l4 m4 s6">
+          <div class="w3-container">
+            <img src="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fprog%20avan.PNG?v=1592527688087" class="msx-book" alt="MSX book cover pic"  width="100%" /> 
+          </div>
+        </div>
+      </div>
+    </p>
+
+    <p>
+      Also, seriously thinking on dive right into the madness and go to Assembly. Found great resources and community
+      related to MSX dev on <a href="https://msx.org/" target="_blank" rel="noreferrer">msx.org</a>, and even an yearly contest of homebrew games on 
+      <a href="https://www.msxdev.org/" target="_blank" rel="noreferrer">MSX dev</a> (imagine a system the has new games released even after 40 years of launch)
+    </p>
+
+    <p>
+      <b>Update on Dec 17th, 2020:</b>
+    </p>
+    <div class="w3-margin">
+      <div class="w3-card-4" style="width:100%">
+        <div class="iframe-container">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/jBd33ZItHYU" frameborder="0" 
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="w3-container w3-center">
+          <p>I recorded this video some time ago, but forgot to update this page...</p>
+        </div>
+      </div>
+    </div>
+
+    <p>
+      Thanks for reading.
+    </p>
+
+    <p>
+      <i class="fa fa-calendar"></i>
+      Published on: <b>June 16th, 2020</b><!--, updated: <b>February 6th, 2019</b>-->
+    </p>
+
+  </div>
+
+</div>

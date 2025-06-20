@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script>
+      const VERSION = "1.10.7"; // TODO: get this from package.json
+      
+      // "1.10.4" - March, 25th 2023 - 2 new links
+      // "1.10.5" - January, 4th 2024 - Updated node and express versions
+      // "1.10.6" - lost version (???)
+      // "1.10.7" - May, 14th 2024 - 2 new links (Blue Led and Sergio Habib)
+
+      // Redirect http traffic to https
+      if (location.protocol != "https:") {
+        location.href =
+          "https:" +
+          window.location.href.substring(window.location.protocol.length);
+      }
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-133663509-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "UA-133663509-1");
+    </script>
+
+    <title>andrebaptista.com.br</title>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta
+      name="Description"
+      content="Personal website for André Baptista, full stack web developer."
+    />
+
+    <!--meta name="theme-color" content="#2F3BA2" /-->
+
+    <link rel="manifest" href="manifest.json" />
+
+    <!-- Icons -->
+    <link
+      rel="shortcut icon"
+      href="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Ffavicon.ico?v=1575982765236"
+      type="image/x-icon"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fapple-touch-icon.png?v=1575982765189"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Ffavicon-32x32.png?v=1575982764285"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Ffavicon-16x16.png?v=1575982765099"
+    />
+    <link
+      rel="mask-icon"
+      href="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fsafari-pinned-tab.svg?v=1575982765025"
+      color="#5bbad5"
+    />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <!-- preloading critical resources -->
+    <link
+      rel="preload"
+      href="https://www.w3schools.com/w3css/4/w3.css"
+      as="style"
+    />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css?family=Roboto"
+      as="style"
+    />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css?family=Montserrat"
+      as="style"
+    />
+    <link
+      rel="preload"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      as="style"
+    />
+    <link rel="preload" href="style.css" as="style" />
+    <link
+      rel="preload"
+      href="https://code.jquery.com/jquery-3.4.1.min.js"
+      as="script"
+    />
+    <link
+      rel="preload"
+      href="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/jquery.validate.min.js"
+      as="script"
+    />
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Montserrat"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="styles/vendor/pace-theme-minimal.css" />
+    <link rel="stylesheet" href="style.css" />
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/jquery.validate.min.js"></script>
+
+    <!-- Pace: Automatic page load progress bar -->
+    <script src="scripts/vendor/pace.min.js"></script>
+
+    <!-- Will add querystring with version number, to force reloading -->
+    <script id="scriptJS"></script>
+
+    <script>
+      document.getElementById("scriptJS").src = "script.js?v=" + VERSION;
+    </script>
+  </head>
+
+  <body class="w3-content" style="max-width: 1200px">
+    <!-- Sidebar/menu -->
+    <nav
+      class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top"
+      style="z-index: 3; width: 250px"
+      id="mySidebar"
+    >
+      <div class="w3-container w3-display-container w3-padding-16">
+        <i
+          onclick="w3_close()"
+          class="fa fa-remove w3-hide-large w3-button w3-display-topright"
+          aria-label="Close menu"
+        ></i>
+        <h3 class="w3-wide"><b>ANDRE</b></h3>
+        <h6 class="w3-wide"><b>BAPTISTA</b></h6>
+        <h6 class="w3-wide w3-small" id="version"></h6>
+      </div>
+      <div
+        class="w3-padding-64 w3-large w3-text-grey"
+        style="font-weight: bold"
+      >
+        <a
+          id="menuMain"
+          href="javascript: void(0)"
+          class="w3-bar-item w3-button"
+          >Main</a
+        >
+
+        <a
+          href="https://curriculum-vitae.glitch.me/"
+          target="_blank"
+          rel="noreferrer"
+          class="w3-bar-item w3-button"
+          >Resumé</a
+        >
+
+        <a
+          href="javascript:void(0)"
+          class="w3-button w3-block w3-white w3-left-align menuFolding"
+        >
+          Projects <i class="fa fa-caret-down"></i>
+        </a>
+        <div class="w3-bar-block w3-padding-large w3-medium menuItems">
+          <a
+            href="javascript: void(0)"
+            data-url="Jaca"
+            data-title="JACA Homebrew CPU"
+            class="loadPage w3-bar-item w3-button"
+            >JACA Homebrew CPU</a
+          >
+          <!--a href="javascript: void(0)" data-url="JacaEmulator" data-title="JACA Emulator" class="loadPage w3-bar-item w3-button w3-small w3-padding-left">JACA Emulator</a-->
+
+          <a
+            href="javascript: void(0)"
+            data-url="MovieManager"
+            data-title="Movie Manager"
+            class="loadPage w3-bar-item w3-button"
+            >Movie Manager</a
+          >
+
+          <a
+            href="javascript: void(0)"
+            data-url="SQLJoinGenerator"
+            data-title="SQL Join Generator"
+            class="loadPage w3-bar-item w3-button"
+            >SQL Join Generator</a
+          >
+
+          <a
+            href="javascript: void(0)"
+            data-url="AiGamePlayer"
+            data-title="AI Game Player"
+            class="loadPage w3-bar-item w3-button"
+            >AI Game Player</a
+          >
+
+          <a
+            href="javascript: void(0)"
+            data-url="NESPi"
+            data-title="NES Pi/SuperPi"
+            class="loadPage w3-bar-item w3-button"
+            >NES Pi/SuperPi</a
+          >
+
+          <a
+            href="javascript: void(0)"
+            data-url="GameboyZero"
+            data-title="Gameboy Zero"
+            class="loadPage w3-bar-item w3-button"
+            >Gameboy Zero</a
+          >
+
+          <a
+            href="javascript: void(0)"
+            data-url="SimCityMsx"
+            data-title="SimCity for MSX"
+            class="loadPage w3-bar-item w3-button"
+            >SimCity for MSX</a
+          >
+
+          <a
+            href="javascript: void(0)"
+            data-url="PacificMsx"
+            data-title="Pacific for MSX"
+            class="loadPage w3-bar-item w3-button"
+            >Pacific for MSX</a
+          >
+
+          <a
+            href="javascript: void(0)"
+            data-url="NesComputer"
+            data-title="Nes Computer"
+            class="loadPage w3-bar-item w3-button"
+            >Nes Computer</a
+          >
+
+          <a
+            href="javascript: void(0)"
+            data-url="ExpertMini"
+            data-title="MSX Expert miniature"
+            class="loadPage w3-bar-item w3-button"
+            >MSX Expert miniature</a
+          >
+
+          <a
+            href="javascript: void(0)"
+            data-url="MsxCollection"
+            data-title="MSX Collection"
+            class="loadPage w3-bar-item w3-button"
+            >MSX Collection</a
+          >
+
+          <a
+            href="javascript: void(0)"
+            data-url="ParanoidGB"
+            data-title="Paranoid for GB"
+            class="loadPage w3-bar-item w3-button"
+            >Paranoid for GB</a
+          >
+
+          <a
+            href="javascript: void(0)"
+            data-url="8bitVDP"
+            data-title="8 bit VDP"
+            class="loadPage w3-bar-item w3-button"
+            >8 bit VDP</a
+          >
+
+          <a
+            href="javascript: void(0)"
+            class="notImplemented w3-bar-item w3-button"
+            >TicTac Mini Game</a
+          >
+
+          <a
+            href="javascript: void(0)"
+            class="notImplemented w3-bar-item w3-button"
+            >Raspberry Pi NAS</a
+          >
+
+          <a
+            href="javascript: void(0)"
+            class="notImplemented w3-bar-item w3-button"
+            >Sudoku Solver</a
+          >
+
+          <a
+            href="javascript: void(0)"
+            class="notImplemented w3-bar-item w3-button"
+            >Jigsaw Solver</a
+          >
+
+          <a
+            href="javascript: void(0)"
+            class="notImplemented w3-bar-item w3-button"
+            >Olx Alert</a
+          >
+        </div>
+
+        <!--a href="#" class="w3-bar-item w3-button">Others</a-->
+
+        <a
+          href="javascript:void(0)"
+          class="w3-button w3-block w3-white w3-left-align menuFolding"
+        >
+          Interesting Texts <i class="fa fa-caret-down"></i>
+        </a>
+        <div class="w3-bar-block w3-padding-large w3-medium">
+          <a
+            href="https://waitbutwhy.com/2014/05/fermi-paradox.html"
+            target="_blank"
+            rel="noreferrer"
+            class="w3-bar-item w3-button"
+            >The Fermi Paradox</a
+          >
+
+          <a
+            href="https://waitbutwhy.com/2015/01/artificial-intelligence-revolution-1.html"
+            target="_blank"
+            rel="noreferrer"
+            class="w3-bar-item w3-button"
+            >The AI Revolution</a
+          >
+
+          <a
+            href="https://idlewords.com/talks/web_design_first_100_years.htm"
+            target="_blank"
+            rel="noreferrer"
+            class="w3-bar-item w3-button"
+            >Web Design: The First 100 Years</a
+          >
+
+          <a
+            href="http://marshallbrain.com/second-intelligent-species.htm"
+            target="_blank"
+            rel="noreferrer"
+            class="w3-bar-item w3-button"
+            >Second Intelligent Species/Manna</a
+          >
+
+          <a
+            href="https://contraditorium.com/2018/03/14/uma-diatribe-nao-solicitada-sobre-ciencia/"
+            target="_blank"
+            rel="noreferrer"
+            class="w3-bar-item w3-button"
+            >Uma diatribe não-solicitada sobre a Ciência (pt-br)</a
+          >
+
+          <a
+            href="http://androidarts.com/Amiga/MSX.htm"
+            target="_blank"
+            rel="noreferrer"
+            class="w3-bar-item w3-button"
+            >MSX concepts</a
+          >
+
+          <a
+            href="http://santiontanon.blogspot.com/2019/04/smooth-scroll-in-xracing.html"
+            target="_blank"
+            rel="noreferrer"
+            class="w3-bar-item w3-button"
+            >Santiago Ontañón blog, X-Racing</a
+          >
+
+          <a
+            href="https://www.redhill.net.au/iu.html"
+            target="_blank"
+            rel="noreferrer"
+            class="w3-bar-item w3-button"
+            >Red Hill H/W guide</a
+          >
+          
+          <a
+            href="https://manualdousuario.net/podcast/tecnocracia-71/"
+            target="_blank"
+            rel="noreferrer"
+            class="w3-bar-item w3-button"
+            >Tecnocracia, O ano da implosão (pt-br)</a
+          >
+
+          <a
+            href="https://jaycarlson.net/2021/09/18/juggle-embedded-projects-home-office-workspace-tour/"
+            target="_blank"
+            rel="noreferrer"
+            class="w3-bar-item w3-button"
+            >Jay Carlson, Home office workspace</a
+          >
+          
+          <a
+            href="https://admiralcloudberg.medium.com/call-of-the-void-seven-years-on-what-do-we-know-about-the-disappearance-of-malaysia-airlines-77fa5244bf99"
+            target="_blank"
+            rel="noreferrer"
+            class="w3-bar-item w3-button"
+            >Admiral Cloudberg, MH-370</a
+          >
+          
+          <a
+            href="http://fabiensanglard.net/floating_point_visually_explained/index.php"
+            target="_blank"
+            rel="noreferrer"
+            class="w3-bar-item w3-button"
+            >Fabien Sanglard, Floating Point visually explained</a
+          >
+          
+          <a
+            href="https://www.bpiropo.com.br/og-euou20021230.htm"
+            target="_blank"
+            rel="noreferrer"
+            class="w3-bar-item w3-button"
+            >B. Piropo, Assim nasce um guru (pt-br)</a
+          >
+          
+          <a
+            href="https://www.youtube.com/watch?v=AF8d72mA41M"
+            target="_blank"
+            rel="noreferrer"
+            class="w3-bar-item w3-button"
+            >The Blue Led history</a
+          >
+          
+          <a
+            href="https://www.youtube.com/watch?v=E7F8h4OT0Sc"
+            target="_blank"
+            rel="noreferrer"
+            class="w3-bar-item w3-button"
+            >Sergio Habib interview (pt-br)</a
+          >
+          
+         
+          
+          <!-- Attempt to put a link to the translated version together (not working so far) -->
+          <!--span class="w3-bar-item">
+            <a href="https://contraditorium.com/2018/03/14/uma-diatribe-nao-solicitada-sobre-ciencia/" class="w3-button" target="_blank" rel="noreferrer">Uma diatribe não-solicitada sobre a Ciência (pt-br)</a>
+            <a href="https://translate.google.com/translate?hl=en&sl=pt&tl=en&u=https%3A%2F%2Fcontraditorium.com%2F2018%2F03%2F14%2Fuma-diatribe-nao-solicitada-sobre-ciencia%2F">(translated)</a>
+          </span-->
+        </div>
+
+        <a
+          href="javascript:void(0)"
+          class="w3-button w3-block w3-white w3-left-align menuFolding"
+        >
+          Other Interests <i class="fa fa-caret-down"></i>
+        </a>
+        <div class="w3-bar-block w3-padding-large w3-medium menuItems">
+          <a
+            href="javascript: void(0)"
+            data-url="others/Lfs"
+            data-title="Live For Speed"
+            class="loadPage w3-bar-item w3-button"
+            >Live For Speed</a
+          >
+        </div>
+      </div>
+      <a href="#footer" class="w3-bar-item w3-button w3-padding">Contact</a>
+      <a
+        href="javascript: void(0)"
+        data-url="others/Faq"
+        data-title="Faq"
+        class="loadPage w3-bar-item w3-button w3-padding"
+        >FAQ</a
+      >
+      <a
+        href="javascript: void(0)"
+        data-url="others/About"
+        data-title="About"
+        class="loadPage w3-bar-item w3-button w3-padding"
+        >About</a
+      >
+
+      <br />
+      <br />
+      <br />
+    </nav>
+
+    <!-- Top menu on small screens -->
+    <header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge">
+      <div class="w3-bar-item w3-padding-24 w3-wide">ANDRE</div>
+      <a
+        href="javascript:void(0)"
+        class="w3-bar-item w3-button w3-padding-24 w3-right"
+        onclick="w3_open()"
+        aria-label="Open menu"
+        ><i class="fa fa-bars"></i
+      ></a>
+    </header>
+
+    <!-- Overlay effect when opening sidebar on small screens -->
+    <div
+      class="w3-overlay w3-hide-large"
+      onclick="w3_close()"
+      style="cursor: pointer"
+      title="Close side menu"
+      id="myOverlay"
+    ></div>
+
+    <!-- !PAGE CONTENT! -->
+    <div class="w3-main" style="margin-left: 250px">
+      <!-- Push down content on small screens -->
+      <div class="w3-hide-large" style="margin-top: 83px"></div>
+
+      <!-- Top header -->
+      <header class="w3-container w3-xlarge">
+        <p id="pageTitle" class="w3-left"></p>
+        <p class="w3-right">
+          <i
+            id="iconHome"
+            class="fa fa-home w3-margin-right w3-hover-opacity pointer"
+            aria-label="Home"
+          ></i>
+          <!--i class="fa fa-shopping-cart w3-margin-right w3-hover-opacity"></i>
+          <i class="fa fa-search w3-hover-opacity"></i-->
+        </p>
+      </header>
+
+      <div id="pageContent">
+        <!-- End page content -->
+      </div>
+
+      <!-- Interesting texts section -->
+      <div class="w3-container w3-black w3-padding-32">
+        <h3>Interesting texts</h3>
+        <p>
+          Cool articles I found while surfing the web (does anyone still use
+          this term?).
+        </p>
+        <!--p><input class="w3-input w3-border" type="text" placeholder="Enter e-mail" style="width:100%"></p>
+        <button type="button" class="w3-button w3-red w3-margin-bottom">Subscribe</button-->
+
+        <div class="w3-row w3-grayscale interestingLinks">
+          <div class="w3-col l2 m3 s6">
+            <div class="w3-container">
+              <a
+                href="https://waitbutwhy.com/2015/01/artificial-intelligence-revolution-1.html"
+                target="_blank"
+                rel="noreferrer"
+                ><div class="w3-display-container">
+                  <picture>
+                    <source
+                      srcset="
+                        https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fai%20rev%20p.png.webp?1556566798502
+                      "
+                      type="image/webp"
+                    />
+                    <img
+                      src="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fai%20rev%20p.png?1544547163949"
+                      alt="Wait But Why - Artificial Intelligence"
+                      style="width: 100%"
+                      class="w3-hover-grayscale"
+                    />
+                  </picture>
+                </div>
+                <p>The AI Revolution<br /></p
+              ></a>
+            </div>
+          </div>
+
+          <div class="w3-col l2 m3 s6">
+            <div class="w3-container">
+              <a
+                href="https://waitbutwhy.com/2014/05/fermi-paradox.html"
+                target="_blank"
+                rel="noreferrer"
+                ><div class="w3-display-container">
+                  <picture>
+                    <source
+                      srcset="
+                        https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Ffermi%20p.png.webp?1556566898579
+                      "
+                      type="image/webp"
+                    />
+                    <img
+                      src="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Ffermi%20p.png?1544547398845"
+                      alt="Wait But Why - The Fermi Paradox"
+                      style="width: 100%"
+                      class="w3-hover-grayscale"
+                    />
+                  </picture>
+                </div>
+                <p>The Fermi Paradox<br /></p
+              ></a>
+            </div>
+          </div>
+
+          <div class="w3-col l2 m3 w3-hide-small">
+            <div class="w3-container">
+              <a
+                href="https://idlewords.com/talks/web_design_first_100_years.htm"
+                target="_blank"
+                rel="noreferrer"
+                ><div class="w3-display-container">
+                  <picture>
+                    <source
+                      srcset="
+                        https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fweb%20design%20100%20years%20p.jpg.webp?1556566964019
+                      "
+                      type="image/webp"
+                    />
+                    <img
+                      src="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fweb%20design%20100%20years%20p.jpg?1544547503742"
+                      alt="Web Design - The First 100 Years"
+                      style="width: 100%"
+                      class="w3-hover-grayscale"
+                    />
+                  </picture>
+                </div>
+                <p>Web Design: The First 100 Years<br /></p
+              ></a>
+            </div>
+          </div>
+
+          <div class="w3-col l2 m3 w3-hide-small">
+            <div class="w3-container">
+              <a
+                href="http://marshallbrain.com/second-intelligent-species.htm"
+                target="_blank"
+                rel="noreferrer"
+                ><div class="w3-display-container">
+                  <picture>
+                    <source
+                      srcset="
+                        https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fsecond%20intel%20p.jpg.webp?1556567041145
+                      "
+                      type="image/webp"
+                    />
+                    <img
+                      src="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fsecond%20intel%20p.jpg?1544613136136"
+                      alt="Second Intelligent Species"
+                      style="width: 100%"
+                      class="w3-hover-grayscale"
+                    />
+                  </picture>
+                </div>
+                <p>Second Intelligent Species/Manna<br /></p
+              ></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer
+        class="w3-padding-64 w3-light-grey w3-small w3-center"
+        id="footer"
+      >
+        <div class="w3-row-padding">
+          <div class="w3-col s6 l6">
+            <h4>Contact</h4>
+            <p>Questions? Go ahead.</p>
+            <form id="contactForm">
+              <p>
+                <input
+                  id="Name"
+                  class="w3-input w3-border"
+                  type="text"
+                  placeholder="Name"
+                  aria-label="Name"
+                  required
+                />
+              </p>
+              <p>
+                <input
+                  id="Email"
+                  class="w3-input w3-border"
+                  type="text"
+                  placeholder="Email"
+                  aria-label="Email"
+                  required
+                />
+              </p>
+              <p>
+                <input
+                  id="Subject"
+                  class="w3-input w3-border"
+                  type="text"
+                  placeholder="Subject"
+                  aria-label="Subject"
+                  required
+                />
+              </p>
+              <p>
+                <input
+                  id="Message"
+                  class="w3-input w3-border"
+                  type="text"
+                  placeholder="Message"
+                  aria-label="Message"
+                  required
+                />
+              </p>
+              <button id="contactSend" class="w3-button w3-block w3-black">
+                Send
+              </button>
+            </form>
+          </div>
+
+          <!--div class="w3-col s4">
+            <h4>About</h4>
+            <p><a href="#">About us</a></p>
+            <p><a href="#">We're hiring</a></p>
+            <p><a href="#">Support</a></p>
+            <p><a href="#">Find store</a></p>
+            <p><a href="#">Shipment</a></p>
+            <p><a href="#">Payment</a></p>
+            <p><a href="#">Gift card</a></p>
+            <p><a href="#">Return</a></p>
+            <p><a href="#">Help</a></p>
+          </div-->
+
+          <div class="w3-col w3-hide-small m2 l2">&nbsp;</div>
+
+          <div class="w3-col s6 m4 l4 w3-justify">
+            <h4>Personal Info</h4>
+            <p><i class="fa fa-fw fa-map-marker"></i> RJ - Brazil</p>
+            <p><i class="fa fa-fw fa-phone"></i> (**)*****-****</p>
+            <p><i class="fa fa-fw fa-envelope"></i> albs_br@yahoo.com.br</p>
+            <!--h4>We accept</h4>
+            <p><i class="fa fa-fw fa-cc-amex"></i> Amex</p>
+            <p><i class="fa fa-fw fa-credit-card"></i> Credit Card</p-->
+            <br />
+            <!--i class="fa fa-facebook-official w3-hover-opacity w3-large"></i-->
+            <!--i class="fa fa-instagram w3-hover-opacity w3-large"></i-->
+            <a
+              href="https://stackoverflow.com/users/2865668/andr%C3%A9-baptista"
+              aria-label="Stack Overflow"
+              target="_blank"
+              rel="noreferrer"
+              ><i class="fa fa-stack-overflow w3-hover-opacity w3-xxlarge"></i
+            ></a>
+            <!--i class="fa fa-twitter w3-hover-opacity w3-large"></i-->
+            <a
+              href="https://www.quora.com/profile/Andr%C3%A9-Baptista-4"
+              aria-label="Quora"
+              target="_blank"
+              rel="noreferrer"
+              ><i class="fa fa-quora w3-hover-opacity w3-xxlarge"></i
+            ></a>
+            <a
+              href="https://github.com/albs-br"
+              aria-label="GitHub"
+              target="_blank"
+              rel="noreferrer"
+              ><i class="fa fa-github w3-hover-opacity w3-xxlarge"></i
+            ></a>
+          </div>
+        </div>
+      </footer>
+
+      <div class="w3-black w3-center w3-padding-24">
+        Powered by
+        <a
+          href="https://www.w3schools.com/w3css/default.asp"
+          title="W3.CSS"
+          target="_blank"
+          rel="noreferrer"
+          class="w3-hover-opacity"
+          >w3.css</a
+        >
+      </div>
+    </div>
+
+    <!-- Alert Modal -->
+    <div id="msgBox" class="w3-modal">
+      <div class="w3-modal-content w3-animate-zoom" style="padding: 32px">
+        <div class="w3-container w3-white w3-center">
+          <i
+            class="btnCloseMsg fa fa-remove w3-right w3-button w3-transparent"
+            aria-label="Close Message"
+          ></i>
+          <h2 id="msgBoxTitle" class="w3-wide">MESSAGE</h2>
+          <p id="msgBoxMessage"></p>
+          <!--p>Join our mailing list to receive updates on new arrivals and special offers.</p>
+          <p><input class="w3-input w3-border" type="text" placeholder="Enter e-mail"></p-->
+          <button
+            type="button"
+            class="btnCloseMsg w3-button w3-padding-large w3-red w3-margin-bottom"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
