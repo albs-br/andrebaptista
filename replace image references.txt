@@ -1,0 +1,5 @@
+Powershell -Command "(gc myFile.txt) -replace 'foo', 'bar' | Out-File -encoding ASCII myFile.txt"
+
+(gc myFile.txt) -replace 'foo', 'bar' | Out-File -encoding ASCII myFile.txt
+
+powershell.exe -executionpolicy bypass -file .\output.ps1
