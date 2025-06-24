@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <script>
-      const VERSION = "1.11.4";
+      const VERSION = "1.12.0";
       
       // "1.10.4" - March, 25th 2023 - 2 new links
       // "1.10.5" - January, 4th 2024 - Updated node and express versions
@@ -10,11 +10,21 @@
       // "1.10.7" - May, 14th 2024 - 2 new links (Blue Led and Sergio Habib)
 
       // Redirect http traffic to https
-      if (location.protocol != "https:") {
+      if (!isLocalhost && location.protocol != "https:") {
         location.href =
           "https:" +
           window.location.href.substring(window.location.protocol.length);
       }
+
+      const isLocalhost = Boolean(
+            window.location.hostname === 'localhost' ||
+            // [::1] is the IPv6 localhost address.
+            window.location.hostname === '[::1]' ||
+            // 127.0.0.1/8 is considered localhost for IPv4.
+            window.location.hostname.match(
+                /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
+            )
+        );
     </script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -49,29 +59,29 @@
     <!-- Icons -->
     <link
       rel="shortcut icon"
-      href="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Ffavicon.ico?v=1575982765236"
+      href="../glitch-assets/favicon.ico?v=1575982765236"
       type="image/x-icon"
     />
     <link
       rel="apple-touch-icon"
       sizes="180x180"
-      href="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fapple-touch-icon.png?v=1575982765189"
+      href="../glitch-assets/apple-touch-icon.png?v=1575982765189"
     />
     <link
       rel="icon"
       type="image/png"
       sizes="32x32"
-      href="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Ffavicon-32x32.png?v=1575982764285"
+      href="../glitch-assets/favicon-32x32.png?v=1575982764285"
     />
     <link
       rel="icon"
       type="image/png"
       sizes="16x16"
-      href="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Ffavicon-16x16.png?v=1575982765099"
+      href="../glitch-assets/favicon-16x16.png?v=1575982765099"
     />
     <link
       rel="mask-icon"
-      href="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fsafari-pinned-tab.svg?v=1575982765025"
+      href="../glitch-assets/safari-pinned-tab.svg?v=1575982765025"
       color="#5bbad5"
     />
     <meta name="msapplication-TileColor" content="#da532c" />
@@ -559,12 +569,12 @@
                   <picture>
                     <source
                       srcset="
-                        https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fai%20rev%20p.png.webp?1556566798502
+                        ../glitch-assets/ai rev p.png.webp?1556566798502
                       "
                       type="image/webp"
                     />
                     <img
-                      src="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fai%20rev%20p.png?1544547163949"
+                      src="../glitch-assets/ai rev p.png?1544547163949"
                       alt="Wait But Why - Artificial Intelligence"
                       style="width: 100%"
                       class="w3-hover-grayscale"
@@ -586,12 +596,12 @@
                   <picture>
                     <source
                       srcset="
-                        https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Ffermi%20p.png.webp?1556566898579
+                        ../glitch-assets/fermi p.png.webp?1556566898579
                       "
                       type="image/webp"
                     />
                     <img
-                      src="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Ffermi%20p.png?1544547398845"
+                      src="../glitch-assets/fermi p.png?1544547398845"
                       alt="Wait But Why - The Fermi Paradox"
                       style="width: 100%"
                       class="w3-hover-grayscale"
@@ -613,12 +623,12 @@
                   <picture>
                     <source
                       srcset="
-                        https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fweb%20design%20100%20years%20p.jpg.webp?1556566964019
+                        ../glitch-assets/web design 100 years p.jpg.webp?1556566964019
                       "
                       type="image/webp"
                     />
                     <img
-                      src="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fweb%20design%20100%20years%20p.jpg?1544547503742"
+                      src="../glitch-assets/web design 100 years p.jpg?1544547503742"
                       alt="Web Design - The First 100 Years"
                       style="width: 100%"
                       class="w3-hover-grayscale"
@@ -640,12 +650,12 @@
                   <picture>
                     <source
                       srcset="
-                        https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fsecond%20intel%20p.jpg.webp?1556567041145
+                        ../glitch-assets/second intel p.jpg.webp?1556567041145
                       "
                       type="image/webp"
                     />
                     <img
-                      src="https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fsecond%20intel%20p.jpg?1544613136136"
+                      src="../glitch-assets/second intel p.jpg?1544613136136"
                       alt="Second Intelligent Species"
                       style="width: 100%"
                       class="w3-hover-grayscale"
