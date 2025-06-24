@@ -175,7 +175,7 @@ function pageOnQueryString() {
 }
 
 // Check querystring to redirect to a project page
-// e.g https://andre-baptista.glitch.me/?page=Nespi
+// e.g https://www.andrebaptista.com.br/?page=Nespi
 function loadPageOnQueryString() {
   
   let page = pageOnQueryString();

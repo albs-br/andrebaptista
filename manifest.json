@@ -3,12 +3,12 @@
   "short_name": "andrebaptista",
   "icons": [
     {
-      "src": "../glitch-assets/android-chrome-192x192.png?v=1575982765160",
+      "src": "../assets/android-chrome-192x192.png?v=1575982765160",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "../glitch-assets/android-chrome-512x512.png?v=1575982765504",
+      "src": "../assets/android-chrome-512x512.png?v=1575982765504",
       "type": "image/png",
       "sizes": "512x512"
     }
