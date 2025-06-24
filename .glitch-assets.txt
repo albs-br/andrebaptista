@@ -162,21 +162,7 @@
 {"name":"wsx.jpg","date":"2020-10-06T19:39:07.573Z","url":"https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fwsx.jpg","type":"image/jpeg","size":104297,"imageWidth":1080,"imageHeight":810,"thumbnail":"https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fthumbnails%2Fwsx.jpg","thumbnailWidth":330,"thumbnailHeight":248,"uuid":"wauvmXYGb0wekpLs"}
 {"name":"paranoid gb environment.jpg","date":"2020-12-17T23:23:44.795Z","url":"https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fparanoid%20gb%20environment.jpg","type":"image/jpeg","size":399245,"imageWidth":1518,"imageHeight":1116,"thumbnail":"https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fthumbnails%2Fparanoid%20gb%20environment.jpg","thumbnailWidth":330,"thumbnailHeight":243,"uuid":"x2j19MMXRRSMBfgm"}
 {"name":"paranoid screen 1.png","date":"2020-12-17T23:44:19.784Z","url":"https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fparanoid%20screen%201.png","type":"image/png","size":6597,"imageWidth":482,"imageHeight":464,"thumbnail":"https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fthumbnails%2Fparanoid%20screen%201.png","thumbnailWidth":330,"thumbnailHeight":318,"uuid":"P4QmAXAP47hGwCP1"}
-
-{
-    "name":"8 bit vdp.png",
-    "date":"2020-12-20T21:43:50.356Z",
-    "url":"https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2F8%20bit%20vdp.png",
-    "type":"image/png",
-    "size":842776,
-    "imageWidth":1200,
-    "imageHeight":927,
-    "thumbnail":"https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fthumbnails%2F8%20bit%20vdp.png",
-    "thumbnailWidth":330,
-    "thumbnailHeight":255,
-    "uuid":"eEO94rTwE56q1NK4"
-}
-
+{    "name":"8 bit vdp.png",    "date":"2020-12-20T21:43:50.356Z",    "url":"https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2F8%20bit%20vdp.png",    "type":"image/png",    "size":842776,    "imageWidth":1200,    "imageHeight":927,    "thumbnail":"https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fthumbnails%2F8%20bit%20vdp.png",    "thumbnailWidth":330,    "thumbnailHeight":255,    "uuid":"eEO94rTwE56q1NK4"}
 {"name":"parking lot small subset.zip","date":"2021-01-06T22:45:16.050Z","url":"https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fparking%20lot%20small%20subset.zip","type":"application/x-zip-compressed","size":87763,"thumbnail":"https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fthumbnails%2Fparking%20lot%20small%20subset.zip","thumbnailWidth":210,"thumbnailHeight":210,"uuid":"2O5zvWchjDhVBadB"}
 {"uuid":"2O5zvWchjDhVBadB","deleted":true}
 {"name":"small images subset plus results.zip","date":"2021-01-06T23:32:14.325Z","url":"https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fsmall%20images%20subset%20plus%20results.zip","type":"application/x-zip-compressed","size":1432969,"thumbnail":"https://cdn.glitch.com/f159bcb4-6b9f-4810-94ab-437b9ad463c0%2Fthumbnails%2Fsmall%20images%20subset%20plus%20results.zip","thumbnailWidth":210,"thumbnailHeight":210,"uuid":"p7vJWsfju7iaj3rf"}
