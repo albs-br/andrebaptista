@@ -21,9 +21,6 @@ fileInputImage.addEventListener('change', (event) => {
     const file = event.target.files[0];
     if (file) {
 
-        ctxImage.fillStyle = "white";
-        ctxImage.fillRect(0, 0, 255, 211);
-
         const reader = new FileReader();
 
         reader.onload = (e) => {
@@ -59,16 +56,28 @@ fileInputPalette.addEventListener('change', (event) => {
 
             const dataView = new DataView(arrayBuffer);
 
+            // if file starts with 0xFE, ignore first 7 bytes (file header)
+            let start;
+            if (dataView.getUint8(0) == 0xFE) {
+                start = 7;
+            }
+            else {
+                start = 0;
+            }
+            
             //console.log("palette file size: " + dataView.byteLength);
-            if(dataView.byteLength != 32) {
-                throw new Error("Palette file must be 32 bytes long.");
+            if(dataView.byteLength != start + 32) {
+                throw new Error("Palette file must be 32 bytes long (or 39 with header).");
             }
 
-            for(let i = 0; i < 32; i++) {
+
+            for(let i = start; i < start + 32; i++) {
                 byteArrayPalette.push(dataView.getUint8(i));
             }
             
             loadPalette(byteArrayPalette, palette);
+
+            drawImage();
         };
 
         reader.onerror = (e) => {
@@ -132,8 +141,7 @@ const processBinaryData = (buffer) => {
 
     //console.log(palette);
 
-    // draw image on canvas;
-    let x=0, y=0;
+    // populate pixels array
     for(let i = start; i < size-32; i++) {
 
         const byteRead = dataView.getUint8(i);
@@ -141,25 +149,39 @@ const processBinaryData = (buffer) => {
         
         const leftPixel = (byteRead & 0xf0) >> 4;
         pixels.push(leftPixel);
-        setPixel(x, y, leftPixel);
+        // setPixel(x, y, leftPixel);
 
         palette[leftPixel].pixelCount++;
         
         const rightPixel = byteRead & 0x0f;
         pixels.push(rightPixel);
-        setPixel(x + 1, y, rightPixel);
+        // setPixel(x + 1, y, rightPixel);
         
         palette[rightPixel].pixelCount++;
 
-        x += 2;
+    }
+
+    drawImage();
+
+    //console.log(output);
+}
+
+const drawImage = () => {
+    ctxImage.fillStyle = "white";
+    ctxImage.fillRect(0, 0, 255, 211);
+
+    let x=0, y=0;
+    for(let i=0; i<pixels.length; i++) {
+
+        setPixel(x, y, pixels[i]);
+
+        x++;
         if(x == 256) {
             x = 0;
             y++;
         }
     }
-
-    //console.log(output);
-}
+};
 
 const setPixel = (x, y, colorIndex) => {
 
