@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <script>
-      const VERSION = "1.13.3";
+      const VERSION = "1.13.4";
       
       // Some milestones:
       // "1.10.4" - March, 25th 2023 - 2 new links
@@ -57,12 +57,31 @@
 
     <!--meta name="theme-color" content="#2F3BA2" /-->
 
+
+
+    <!-- Old HTTP headers from the time the app was served by a NodeJS server
+    // set HTTP headers
+    app.use(function(req, res, next) {
+        res.setHeader("Content-Security-Policy", "default-src 'self' https:; script-src 'self' https: 'unsafe-inline'; style-src 'self' https: 'unsafe-inline'");
+        res.setHeader("X-Frame-Options", "SAMEORIGIN");
+        res.setHeader("X-XSS-Protection", "1; mode=block");
+        res.setHeader("X-Content-Type-Options", "nosniff");
+        res.setHeader("Referrer-Policy", "no-referrer");
+        res.setHeader("Feature-Policy", "vibrate 'self'; geolocation 'self'; camera 'none'; payment 'none'; fullscreen 'self'");
+        res.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
+        res.setHeader("Server", "html");
+        res.setHeader("X-Powered-By", "html");
+        next();
+    });
+    -->
+
+
     <!-- Using Meta tags to simulate security headers (Github Pages do not support changing headers) -->
     <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains" />
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self'" />
-    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' https: 'unsafe-inline'; style-src 'self' https: 'unsafe-inline'" />
+    <!-- <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" /> --> <!-- X-Frame-Options may only be set via an HTTP header sent along with a document. It may not be set inside <meta>. -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-    <meta http-equiv="Referrer-Policy" content="" />
+    <meta http-equiv="Referrer-Policy" content="no-referrer" />
     <meta http-equiv="Permissions-Policy" content="" />
 
 
