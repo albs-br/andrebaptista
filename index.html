@@ -2,8 +2,9 @@
 <html lang="en">
   <head>
     <script>
-      const VERSION = "1.13.1";
+      const VERSION = "1.13.3";
       
+      // Some milestones:
       // "1.10.4" - March, 25th 2023 - 2 new links
       // "1.10.5" - January, 4th 2024 - Updated node and express versions
       // "1.10.6" - lost version (???)
@@ -55,6 +56,15 @@
     />
 
     <!--meta name="theme-color" content="#2F3BA2" /-->
+
+    <!-- Using Meta tags to simulate security headers (Github Pages do not support changing headers) -->
+    <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains" />
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self'" />
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="Referrer-Policy" content="" />
+    <meta http-equiv="Permissions-Policy" content="" />
+
 
     <link rel="manifest" href="manifest.json" />
 
