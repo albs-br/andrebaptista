@@ -2,24 +2,17 @@
 <html lang="en">
   <head>
     <script>
-      const VERSION = "1.13.5";
-      
-      // Some milestones:
-      // "1.10.4" - March, 25th 2023 - 2 new links
-      // "1.10.5" - January, 4th 2024 - Updated node and express versions
-      // "1.10.6" - lost version (???)
-      // "1.10.7" - May, 14th 2024 - 2 new links (Blue Led and Sergio Habib)
-      // "1.11.0" - Jun, 2025 - Migration to GitHubPages
-      // "1.13.0" - Oct, 2025 - App MSX Image Tools first version
+        const VERSION = "1.13.6";
+        
+        // Some milestones:
+        // "1.10.4" - March, 25th 2023 - 2 new links
+        // "1.10.5" - January, 4th 2024 - Updated node and express versions
+        // "1.10.6" - lost version (???)
+        // "1.10.7" - May, 14th 2024 - 2 new links (Blue Led and Sergio Habib)
+        // "1.11.0" - Jun, 2025 - Migration to GitHubPages
+        // "1.13.0" - Oct, 2025 - App MSX Image Tools first version
 
-      // Redirect http traffic to https
-      if (!isLocalhost && location.protocol != "https:") {
-        location.href =
-          "https:" +
-          window.location.href.substring(window.location.protocol.length);
-      }
-
-      const isLocalhost = Boolean(
+        const isLocalhost = Boolean(
             window.location.hostname === 'localhost' ||
             // [::1] is the IPv6 localhost address.
             window.location.hostname === '[::1]' ||
@@ -28,6 +21,13 @@
                 /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
             )
         );
+        
+        // Redirect http traffic to https
+        if (!isLocalhost && location.protocol != "https:") {
+            location.href =
+            "https:" +
+            window.location.href.substring(window.location.protocol.length);
+        }
     </script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
