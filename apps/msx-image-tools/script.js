@@ -212,8 +212,8 @@ const updateOutput = () => {
 };
 
 const loadPalette = (byteArrayPalette, palette) => {
-    ctxPalette.fillStyle = "white";
-    ctxPalette.fillRect(0, 0, 255, 15);
+    // ctxPalette.fillStyle = "white";
+    // ctxPalette.fillRect(0, 0, 512, 64);
 
     let colorIndex = 0;
     for(let i = 0; i < 32; i += 2) {
@@ -239,8 +239,13 @@ const loadPalette = (byteArrayPalette, palette) => {
         
         //console.log(`Color index: ${colorIndex}; red: ${red}, blue: ${blue}, green: ${green}`);
 
+        ctxPalette.font = "12px Arial";
+        ctxPalette.fillStyle = "#000000";
+        ctxPalette.textAlign = "center";
+        ctxPalette.fillText(colorIndex, (colorIndex * 32) + 16, 16 + 12);
+
         ctxPalette.fillStyle = `rgb(${red * 32} ${green * 32} ${blue * 32})`;
-        ctxPalette.fillRect(colorIndex * 16, 0, 16, 16);
+        ctxPalette.fillRect(colorIndex * 32, 32, 32, 32);
 
         colorIndex++;
     }

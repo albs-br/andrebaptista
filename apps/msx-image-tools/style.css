@@ -11,3 +11,9 @@ h1 {
   text-align: center;
   margin-bottom: 20px;
 }
+
+.version {
+    position: absolute;
+    top: 20px;
+    right: 50px;
+}
