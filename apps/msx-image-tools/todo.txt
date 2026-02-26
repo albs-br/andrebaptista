@@ -1,2 +1,4 @@
 -Replace color
 -Zoom
+-convert sc5 to sprites
+-fix bug "Lines: 236.75"    OK

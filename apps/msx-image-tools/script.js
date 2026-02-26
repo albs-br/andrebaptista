@@ -11,10 +11,12 @@ const output = document.getElementById('output');
 
 rdoPaletteSource_Palette.addEventListener('click', (event) => {
     fileInputPalette.hidden = false;
+    processImageRawData();
 });
 
 rdoPaletteSource_Image.addEventListener('click', (event) => {
     fileInputPalette.hidden = true;
+    processImageRawData();
 });
 
 fileInputImage.addEventListener('change', (event) => {
@@ -27,9 +29,16 @@ fileInputImage.addEventListener('change', (event) => {
             const arrayBuffer = e.target.result;
             // arrayBuffer now contains the binary data of the file
             // You can process the binary data here
-            processBinaryData(arrayBuffer);
+            
+            //processBinaryData(arrayBuffer);
+            rawData = [];
+            const dataView = new DataView(arrayBuffer);
+            for(let i = 0; i < dataView.byteLength; i++) {
+                const byteRead = dataView.getUint8(i);
+                rawData.push(byteRead);
+            }
 
-            updateOutput();
+            processImageRawData();
         };
 
         reader.onerror = (e) => {
@@ -77,7 +86,11 @@ fileInputPalette.addEventListener('change', (event) => {
             
             loadPalette(byteArrayPalette, palette);
 
-            drawImage();
+            processImageRawData();
+
+            // drawImage();
+
+            // updateOutput();
         };
 
         reader.onerror = (e) => {
@@ -88,28 +101,30 @@ fileInputPalette.addEventListener('change', (event) => {
     }
 });
 
+let rawData;
 let palette;
+let paletteOnImage;
 let pixels;
 let hasHeader;
 let size;
 let byteArrayPalette;
 
-const processBinaryData = (buffer) => {
+const processImageRawData = () => {
 
     palette = [];
     pixels = [];
 
-    const dataView = new DataView(buffer);
+    // const dataView = new DataView(buffer);
 
-    size = dataView.byteLength;
+    size = rawData.length;
     
     let start;
 
     console.log("Size:", size);
-    console.log("First byte:", dataView.getUint8(0));
+    console.log("First byte:", rawData[0]);
 
     // if file starts with 0xFE, ignore first 7 bytes (file header)
-    if (dataView.getUint8(0) == 0xFE) {
+    if (rawData[0] == 0xFE) {
         hasHeader = true;
         start = 7;
     }
@@ -125,11 +140,13 @@ const processBinaryData = (buffer) => {
         // get palette from the last 32 bytes of image
         byteArrayPalette = [];
         for(let i = size-32; i < size; i++) {
-            byteArrayPalette.push(dataView.getUint8(i));
+            byteArrayPalette.push(rawData[i]);
         }
+        paletteOnImage = true;
     }
     else if(radioValue == "palette") {
         // get palette from palette file
+        paletteOnImage = false;
     }
     else {
         //console.error("Palette source must be chosen.");
@@ -140,11 +157,12 @@ const processBinaryData = (buffer) => {
     loadPalette(byteArrayPalette, palette);
 
     //console.log(palette);
+    let endOfPixels = (paletteOnImage) ? size - 32 : size;
 
     // populate pixels array
-    for(let i = start; i < size-32; i++) {
+    for(let i = start; i < endOfPixels; i++) {
 
-        const byteRead = dataView.getUint8(i);
+        const byteRead = rawData[i];
         //output += byteRead + ", "
         
         const leftPixel = (byteRead & 0xf0) >> 4;
@@ -158,10 +176,11 @@ const processBinaryData = (buffer) => {
         // setPixel(x + 1, y, rightPixel);
         
         palette[rightPixel].pixelCount++;
-
     }
 
     drawImage();
+
+    updateOutput();
 
     //console.log(output);
 }

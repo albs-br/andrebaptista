@@ -7,46 +7,52 @@
 <body>
 
     <h1>MSX Image Tools</h1>
-    <div class="version">v.0.3.0</div>
+    <div class="version">v.0.4.0</div>
 
-    <fieldset>
-    
-        <legend>Image</legend> 
+    <form>
+
+        <input type="reset" />
+
+        <fieldset>
         
-        <label for="fileInputImage">File (*.sc5):</label>
-	    <input type="file" id="fileInputImage" accept=".sc5" />
+            <legend>Image</legend> 
+            
+            <label for="fileInputImage">File (*.sc5):</label>
+            <input type="file" id="fileInputImage" accept=".sc5" />
+
+            <br />
+            
+            <canvas id="canvasScreen" width="256" height="256" style="border:1px solid #000000;">
+            </canvas>
+
+        </fieldset>
+
+        <fieldset>
+        
+            <legend>Palette</legend> 
+
+            <input type="radio" id="rdoPaletteSource_Image" name="rdoPaletteSource" value="image" checked="true" />
+            <label for="rdoPaletteSource_Image">Palette from image file</label>
+            <input type="radio" id="rdoPaletteSource_Palette" name="rdoPaletteSource" value="palette" />
+            <label for="rdoPaletteSource_Palette">Palette from palette file (*.pal, *.pl5)</label>
+            
+            <input type="file" id="fileInputPalette" accept=".pal,.pl5" hidden="true" />
+        
+            <br />
+
+            <canvas id="canvasPalette" width="512" height="64">
+            </canvas>
+
+        </fieldset>	
 
         <br />
+
         
-        <canvas id="canvasScreen" width="256" height="256" style="border:1px solid #000000;">
-        </canvas>
-
-    </fieldset>
-
-    <fieldset>
-    
-        <legend>Palette</legend> 
-
-        <input type="radio" id="rdoPaletteSource_Image" name="rdoPaletteSource" value="image" checked="true" />
-        <label for="rdoPaletteSource_Image">Palette from image file</label>
-        <input type="radio" id="rdoPaletteSource_Palette" name="rdoPaletteSource" value="palette" />
-        <label for="rdoPaletteSource_Palette">Palette from palette file (*.pal, *.pl5)</label>
-        
-        <input type="file" id="fileInputPalette" accept=".pal,.pl5" hidden="true" />
-    
         <br />
 
-        <canvas id="canvasPalette" width="512" height="64">
-	    </canvas>
+        <textarea id="output" style="width: 100%; height: 350px;"></textarea>
 
-    </fieldset>	
-
-    <br />
-
-	
-    <br />
-
-	<textarea id="output" style="width: 100%; height: 350px;"></textarea>
+    </form>
 
     <script type="text/javascript" src="script.js"></script>
 
