@@ -6,6 +6,9 @@ const ctxPalette = c1.getContext("2d");
 const fileInputPalette = document.getElementById("fileInputPalette");
 const rdoPaletteSource_Image = document.getElementById("rdoPaletteSource_Image");
 const rdoPaletteSource_Palette = document.getElementById("rdoPaletteSource_Palette");
+const btnExecuteCommand = document.getElementById("btnExecuteCommand");
+const comboColorFrom = document.getElementById("comboColorFrom");
+const comboColorTo = document.getElementById("comboColorTo");
 
 const output = document.getElementById('output');
 
@@ -49,6 +52,13 @@ fileInputImage.addEventListener('change', (event) => {
     }
 });
 
+btnExecuteCommand.addEventListener('click', (event) => {
+    const colorFrom = comboColorFrom.value;
+    const colorTo = comboColorTo.value;
+    
+    replaceColor(colorFrom, colorTo);
+});
+
 fileInputPalette.addEventListener('change', (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -87,10 +97,6 @@ fileInputPalette.addEventListener('change', (event) => {
             loadPalette(byteArrayPalette, palette);
 
             processImageRawData();
-
-            // drawImage();
-
-            // updateOutput();
         };
 
         reader.onerror = (e) => {
@@ -183,7 +189,20 @@ const processImageRawData = () => {
     updateOutput();
 
     //console.log(output);
-}
+};
+
+const replaceColor = (colorFrom, colorTo) => {
+
+    for(let i = 0; i < pixels.length; i++) {
+        if(pixels[i] == colorFrom) { 
+            pixels[i] = colorTo;
+        }
+    }
+
+    drawImage();
+
+    updateOutput();
+};
 
 const drawImage = () => {
     ctxImage.fillStyle = "white";
