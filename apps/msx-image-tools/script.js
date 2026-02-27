@@ -9,6 +9,7 @@ const rdoPaletteSource_Palette = document.getElementById("rdoPaletteSource_Palet
 const btnExecuteCommand = document.getElementById("btnExecuteCommand");
 const comboColorFrom = document.getElementById("comboColorFrom");
 const comboColorTo = document.getElementById("comboColorTo");
+const btnSaveFile = document.getElementById("btnSaveFile");
 
 const output = document.getElementById('output');
 
@@ -105,6 +106,22 @@ fileInputPalette.addEventListener('change', (event) => {
 
         reader.readAsArrayBuffer(file);
     }
+});
+
+btnSaveFile.addEventListener('click', (event) => {
+
+    const binaryArray = [];
+    for(let i=0; i < pixels.length; i += 2) {
+        const leftPixel = pixels[i] << 4;
+        const rightPixel = pixels[i+1];
+
+        binaryArray.push(leftPixel | rightPixel);
+    }
+
+    const binaryData = new Uint8Array(binaryArray);
+
+    const blob = new Blob([binaryData], { type: 'application/octet-stream' });
+    saveFile(blob, 'image.sc5');    
 });
 
 let rawData;
@@ -287,4 +304,25 @@ const loadPalette = (byteArrayPalette, palette) => {
 
         colorIndex++;
     }
+};
+
+const saveFile = async (blob, suggestedName) => {
+  // Feature detection
+  if ('showSaveFilePicker' in window) {
+    try {
+      const handle = await window.showSaveFilePicker({ suggestedName });
+      const writable = await handle.createWritable();
+      await writable.write(blob);
+      await writable.close();
+      return;
+    } catch (err) {
+      console.error(err.name, err.message);
+    }
+  }
+  // Fallback for unsupported browsers
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = suggestedName;
+  link.click();
+  URL.revokeObjectURL(link.href);
 };
