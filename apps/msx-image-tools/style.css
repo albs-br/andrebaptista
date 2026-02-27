@@ -17,3 +17,11 @@ h1 {
     top: 20px;
     right: 50px;
 }
+
+.inputNumber {
+    width: 50px;
+}
+
+.divCmd {
+    padding: 20px;
+}
