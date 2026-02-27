@@ -1,4 +1,4 @@
--Replace color
+-Replace color              OK
 -Zoom
 -convert sc5 to sprites
 -fix bug "Lines: 236.75"    OK
