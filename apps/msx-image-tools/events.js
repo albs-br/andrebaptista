@@ -12,18 +12,21 @@ const comboColorTo = document.getElementById("comboColorTo");
 const btnSaveFile = document.getElementById("btnSaveFile");
 const div_Cmd_ReplaceColor = document.getElementById("div_Cmd_ReplaceColor");
 const div_Cmd_ConvertToSprites = document.getElementById("div_Cmd_ConvertToSprites");
+const txt_ConvertToSprites_X = document.getElementById("txt_ConvertToSprites_X");
+const txt_ConvertToSprites_Y = document.getElementById("txt_ConvertToSprites_Y");
+
 
 const btnReset = document.getElementById("btnReset");
 
 const output = document.getElementById('output');
 
-rdoPaletteSource_Palette.addEventListener('click', (event) => {
-    fileInputPalette.hidden = false;
+rdoPaletteSource_Image.addEventListener('click', (event) => {
+    fileInputPalette.hidden = true;
     processImageRawData();
 });
 
-rdoPaletteSource_Image.addEventListener('click', (event) => {
-    fileInputPalette.hidden = true;
+rdoPaletteSource_Palette.addEventListener('click', (event) => {
+    fileInputPalette.hidden = false;
     processImageRawData();
 });
 
@@ -59,10 +62,18 @@ fileInputImage.addEventListener('change', (event) => {
 
 btnExecuteCommand.addEventListener('click', (event) => {
     try {
-        const colorFrom = comboColorFrom.value;
-        const colorTo = comboColorTo.value;
-        
-        replaceColor(colorFrom, colorTo);
+        if(comboCommand.value == 0) {
+            const colorFrom = comboColorFrom.value;
+            const colorTo = comboColorTo.value;
+            
+            replaceColor(colorFrom, colorTo);
+        }
+        else if(comboCommand.value == 1) {
+            const x = txt_ConvertToSprites_X.value;
+            const y = txt_ConvertToSprites_Y.value;
+
+            convertSC5toSprites(x, y);
+        }
     }
     catch {
         alert('Error');
@@ -120,21 +131,23 @@ fileInputPalette.addEventListener('change', (event) => {
 btnSaveFile.addEventListener('click', (event) => {
 
     try {
-        const binaryArray = [];
-        for(let i=0; i < pixels.length; i += 2) {
-            const leftPixel = pixels[i] << 4;
-            const rightPixel = pixels[i+1];
+        if(pixels) {
+            const binaryArray = [];
+            for(let i=0; i < pixels.length; i += 2) {
+                const leftPixel = pixels[i] << 4;
+                const rightPixel = pixels[i+1];
 
-            binaryArray.push(leftPixel | rightPixel);
+                binaryArray.push(leftPixel | rightPixel);
+            }
+
+            const binaryData = new Uint8Array(binaryArray);
+
+            const blob = new Blob([binaryData], { type: 'application/octet-stream' });
+            saveFile(blob, 'image.sc5');
         }
-
-        const binaryData = new Uint8Array(binaryArray);
-
-        const blob = new Blob([binaryData], { type: 'application/octet-stream' });
-        saveFile(blob, 'image.sc5');    
     }
     catch {
-        alert('Error');
+        alert('Error saving file');
     }
 });
 

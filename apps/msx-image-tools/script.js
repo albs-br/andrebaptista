@@ -13,6 +13,8 @@ const processImageRawData = () => {
 
     // const dataView = new DataView(buffer);
 
+    if(!rawData) return;
+
     size = rawData.length;
     
     let start;
@@ -102,14 +104,16 @@ const drawImage = () => {
     ctxImage.fillRect(0, 0, 255, 211);
 
     let x=0, y=0;
-    for(let i=0; i<pixels.length; i++) {
+    if(pixels) {
+        for(let i=0; i<pixels.length; i++) {
 
-        setPixel(x, y, pixels[i]);
+            setPixel(x, y, pixels[i]);
 
-        x++;
-        if(x == 256) {
-            x = 0;
-            y++;
+            x++;
+            if(x == 256) {
+                x = 0;
+                y++;
+            }
         }
     }
 };
@@ -133,10 +137,12 @@ const updateOutput = () => {
     output.innerHTML += "Lines: " + ((pixels.length)/256) + "\r";
     
     let uniqueColors = 0;
-    for(let i=0; i<16; i++) {
-        const percent = ((palette[i].pixelCount/pixels.length) * 100).toFixed(2);
-        output.innerHTML += `Color ${i}: ${palette[i].pixelCount} pixels (${percent}%)\r`;
-        if(palette[i].pixelCount) uniqueColors++;
+    if(pixels) {
+        for(let i=0; i<16; i++) {
+            const percent = ((palette[i].pixelCount/pixels.length) * 100).toFixed(2);
+            output.innerHTML += `Color ${i}: ${palette[i].pixelCount} pixels (${percent}%)\r`;
+            if(palette[i].pixelCount) uniqueColors++;
+        }
     }
 
     output.innerHTML += `Unique colors: ${uniqueColors}\r`;
@@ -203,10 +209,32 @@ const saveFile = async (blob, suggestedName) => {
   URL.revokeObjectURL(link.href);
 };
 
+// Convert a 32x32 area of a SC5 image to sprites
+const convertSC5toSprites = (xBase, yBase) => {
+    const transparentColor = 0;
+    const sprPat = "  db  ";
+    for(let y=yBase; y < 32; y++) {
+        for(let x=xBase; x < 32; x++) {
+            if(pixels[(y*256) + x] != transparentColor) {
+                sprPat += "1";
+            }
+            else {
+                sprPat += "0";
+            }
+
+            sprPat += " b\n";
+        }
+    }
+
+    console.log(sprPat);
+};
+
 const reset = () => {
 
     div_Cmd_ReplaceColor.hidden = false;
     div_Cmd_ConvertToSprites.hidden = true;
+
+    rdoPaletteSource_Image.click();
 
     // TODO: clear both canvas
 };
