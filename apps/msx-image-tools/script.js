@@ -209,24 +209,35 @@ const saveFile = async (blob, suggestedName) => {
   URL.revokeObjectURL(link.href);
 };
 
-// Convert a 32x32 area of a SC5 image to sprites
-const convertSC5toSprites = (xBase, yBase) => {
-    const transparentColor = 0;
-    const sprPat = "  db  ";
-    for(let y=yBase; y < 32; y++) {
-        for(let x=xBase; x < 32; x++) {
-            if(pixels[(y*256) + x] != transparentColor) {
+// Convert a 32x32 area of a SC5 image to sprites (two layers, 8 sprites of size 16x16)
+const convertSC5toSprites = (xBase, yBase, transparentColor) => {
+    const colors = [];
+    for(let y=yBase; y < yBase + 16; y++) {
+        for(let i=0; i<16; i++) {
+            colors[i] = 0;
+        }
+        let sprPat = "";
+        for(let x=xBase; x < xBase + 16; x++) {
+            const color = parseInt(pixels[(y*256) + x]);
+            colors[color]++;
+            if(color != transparentColor) {
                 sprPat += "1";
             }
             else {
                 sprPat += "0";
             }
-
-            sprPat += " b\n";
         }
+        sprPat += " b\n";
+        
+        console.log("Pattern: " + sprPat);
+        let strColor = "Colors: ";
+        for(let i=0; i<16; i++) {
+            strColor += colors[i] + ", ";
+        }
+        console.log(strColor);
+
     }
 
-    console.log(sprPat);
 };
 
 const reset = () => {

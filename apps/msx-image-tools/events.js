@@ -14,6 +14,7 @@ const div_Cmd_ReplaceColor = document.getElementById("div_Cmd_ReplaceColor");
 const div_Cmd_ConvertToSprites = document.getElementById("div_Cmd_ConvertToSprites");
 const txt_ConvertToSprites_X = document.getElementById("txt_ConvertToSprites_X");
 const txt_ConvertToSprites_Y = document.getElementById("txt_ConvertToSprites_Y");
+const combo_ConvertToSprites_TransparentColor = document.getElementById("combo_ConvertToSprites_TransparentColor");
 
 
 const btnReset = document.getElementById("btnReset");
@@ -69,14 +70,15 @@ btnExecuteCommand.addEventListener('click', (event) => {
             replaceColor(colorFrom, colorTo);
         }
         else if(comboCommand.value == 1) {
-            const x = txt_ConvertToSprites_X.value;
-            const y = txt_ConvertToSprites_Y.value;
+            const x = parseInt(txt_ConvertToSprites_X.value);
+            const y = parseInt(txt_ConvertToSprites_Y.value);
+            const transparentColor = parseInt(combo_ConvertToSprites_TransparentColor.value);
 
-            convertSC5toSprites(x, y);
+            convertSC5toSprites(x, y, transparentColor);
         }
     }
-    catch {
-        alert('Error');
+    catch(e) {
+        alert('Error ' + e);
     }
 });
 
