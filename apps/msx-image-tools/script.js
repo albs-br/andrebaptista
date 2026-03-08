@@ -211,28 +211,42 @@ const saveFile = async (blob, suggestedName) => {
 
 // Convert a 32x32 area of a SC5 image to sprites (two layers, 8 sprites of size 16x16)
 const convertSC5toSprites = (xBase, yBase, transparentColor) => {
-    const colors = [];
+    let colors = [];
     for(let y=yBase; y < yBase + 16; y++) {
         for(let i=0; i<16; i++) {
-            colors[i] = 0;
+            colors[i] = {
+                index: i,
+                count: 0
+            };
         }
         let sprPat = "";
         for(let x=xBase; x < xBase + 16; x++) {
             const color = parseInt(pixels[(y*256) + x]);
-            colors[color]++;
             if(color != transparentColor) {
-                sprPat += "1";
+                colors[color].count++;
             }
-            else {
-                sprPat += "0";
-            }
+            // if(color != transparentColor) {
+            //     sprPat += "1";
+            // }
+            // else {
+            //     sprPat += "0";
+            // }
         }
-        sprPat += " b\n";
+        //sprPat += " b\n";
         
-        console.log("Pattern: " + sprPat);
+        //console.log("Pattern: " + sprPat);
+
+        // colors = colors
+        //     .filter(item => item.index != transparentColor);
+
+        colors.sort((a, b) => b.count - a.count);
+
+        let color_0 = colors[0].index;
+        let color_1 = colors[1].index;
+
         let strColor = "Colors: ";
         for(let i=0; i<16; i++) {
-            strColor += colors[i] + ", ";
+            strColor += `[index: ${colors[i].index}, count: ${colors[i].count}], `;
         }
         console.log(strColor);
 
