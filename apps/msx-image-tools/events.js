@@ -1,8 +1,9 @@
 const fileInputImage = document.getElementById('fileInputImage');
-const c = document.getElementById("canvasScreen");
-const ctxImage = c.getContext("2d");
-const c1 = document.getElementById("canvasPalette");
-const ctxPalette = c1.getContext("2d");
+
+const ctxImage = document.getElementById("canvasScreen").getContext("2d");
+const ctxPalette = document.getElementById("canvasPalette").getContext("2d");
+const ctxSprite = document.getElementById("canvasSprite").getContext("2d");
+
 const fileInputPalette = document.getElementById("fileInputPalette");
 const rdoPaletteSource_Image = document.getElementById("rdoPaletteSource_Image");
 const rdoPaletteSource_Palette = document.getElementById("rdoPaletteSource_Palette");

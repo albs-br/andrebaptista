@@ -33,7 +33,6 @@ const processImageRawData = () => {
     }
 
     const radioValue = document.querySelector("input[name=rdoPaletteSource]:checked").value;
-    // console.log(radioValue);
 
     if(radioValue == "image") {
         // get palette from the last 32 bytes of image
@@ -48,31 +47,25 @@ const processImageRawData = () => {
         paletteOnImage = false;
     }
     else {
-        //console.error("Palette source must be chosen.");
-        //return;
         throw new Error("Palette source must be chosen.");
     }
     
     loadPalette(byteArrayPalette, palette);
 
-    //console.log(palette);
     let endOfPixels = (paletteOnImage) ? size - 32 : size;
 
     // populate pixels array
     for(let i = start; i < endOfPixels; i++) {
 
         const byteRead = rawData[i];
-        //output += byteRead + ", "
         
         const leftPixel = (byteRead & 0xf0) >> 4;
         pixels.push(leftPixel);
-        // setPixel(x, y, leftPixel);
 
         palette[leftPixel].pixelCount++;
         
         const rightPixel = byteRead & 0x0f;
         pixels.push(rightPixel);
-        // setPixel(x + 1, y, rightPixel);
         
         palette[rightPixel].pixelCount++;
     }
@@ -80,8 +73,6 @@ const processImageRawData = () => {
     drawImage();
 
     updateOutput();
-
-    //console.log(output);
 };
 
 const replaceColor = (colorFrom, colorTo) => {
@@ -107,7 +98,7 @@ const drawImage = () => {
     if(pixels) {
         for(let i=0; i<pixels.length; i++) {
 
-            setPixel(x, y, pixels[i]);
+            setPixel(x, y, pixels[i], ctxImage);
 
             x++;
             if(x == 256) {
@@ -118,15 +109,43 @@ const drawImage = () => {
     }
 };
 
-const setPixel = (x, y, colorIndex) => {
+const drawSprite = () => {
+    const zoom = 2;
 
+    ctxSprite.fillStyle = "white";
+    ctxSprite.fillRect(0, 0, 31, 31);
+
+    if(patterns_0 && colors_0) {
+        for(let y=0; y<16; y++) {
+            for(let x=0; x<16; x++) {
+                if(patterns_0[y].substring(x, x+1) == "1") {
+                    setPixel(x, y, colors_0[y], ctxSprite, zoom);
+                }
+            }
+        }
+    }
+
+    if(patterns_1 && colors_1) {
+        for(let y=0; y<16; y++) {
+            for(let x=0; x<16; x++) {
+                if(patterns_1[y].substring(x, x+1) == "1") {
+                    setPixel(x, y, colors_1[y], ctxSprite, zoom);
+                }
+            }
+        }
+    }
+};
+
+const setPixel = (x, y, colorIndex, ctx, zoom) => {
+
+    if(!zoom) zoom = 1;
 
     const red = palette[colorIndex].red * 32;
     const green = palette[colorIndex].green * 32;
     const blue = palette[colorIndex].blue * 32;
 
-    ctxImage.fillStyle = `rgb(${red} ${green} ${blue})`;
-    ctxImage.fillRect(x, y, 1, 1);
+    ctx.fillStyle = `rgb(${red} ${green} ${blue})`;
+    ctx.fillRect(x * zoom, y * zoom, zoom, zoom);
 };
 
 const updateOutput = () => {
@@ -209,48 +228,69 @@ const saveFile = async (blob, suggestedName) => {
   URL.revokeObjectURL(link.href);
 };
 
+let patterns_0 = [];
+let patterns_1 = [];
+let colors_0 = [];
+let colors_1 = [];
+
 // Convert a 32x32 area of a SC5 image to sprites (two layers, 8 sprites of size 16x16)
 const convertSC5toSprites = (xBase, yBase, transparentColor) => {
-    let colors = [];
+    let colorsCount = [];
+    let line = 0;
     for(let y=yBase; y < yBase + 16; y++) {
         for(let i=0; i<16; i++) {
-            colors[i] = {
+            colorsCount[i] = {
                 index: i,
                 count: 0
             };
         }
-        let sprPat = "";
         for(let x=xBase; x < xBase + 16; x++) {
             const color = parseInt(pixels[(y*256) + x]);
             if(color != transparentColor) {
-                colors[color].count++;
+                colorsCount[color].count++;
             }
-            // if(color != transparentColor) {
-            //     sprPat += "1";
-            // }
-            // else {
-            //     sprPat += "0";
-            // }
         }
-        //sprPat += " b\n";
-        
-        //console.log("Pattern: " + sprPat);
 
-        // colors = colors
-        //     .filter(item => item.index != transparentColor);
-
-        colors.sort((a, b) => b.count - a.count);
-
-        let color_0 = colors[0].index;
-        let color_1 = colors[1].index;
+        colorsCount.sort((a, b) => b.count - a.count);
 
         let strColor = "Colors: ";
         for(let i=0; i<16; i++) {
-            strColor += `[index: ${colors[i].index}, count: ${colors[i].count}], `;
+            strColor += `[index: ${colorsCount[i].index}, count: ${colorsCount[i].count}], `;
         }
         console.log(strColor);
 
+
+        // TODO: do color substitutions for closest color
+
+        colors_0[line] = colorsCount[0].index;
+        colors_1[line] = (colorsCount[1].count > 0) ? colorsCount[1].index : null;
+
+        patterns_0[line] = "";
+        patterns_1[line] = "";
+        for(let x=xBase; x < xBase + 16; x++) {
+            const color = parseInt(pixels[(y*256) + x]);
+            if(color == colors_0[line]) { 
+                patterns_0[line] += "1";
+                patterns_1[line] += "0";
+            }
+            else {
+                patterns_0[line] += "0";
+                if(color == colors_1[line]) { 
+                    patterns_1[line] += "1";
+                }
+                else {
+                    patterns_1[line] += "0";
+                }
+            }
+        }
+        console.log(`${patterns_0[line]} ${colors_0[line]}`);
+        console.log(`${patterns_1[line]} ${colors_1[line]}`);
+
+
+        line++;
     }
+
+    drawSprite();
 
 };
 
