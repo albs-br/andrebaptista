@@ -187,10 +187,12 @@ const loadPalette = (byteArrayPalette, palette) => {
         const green = byteRead_1 & 0x0f;
         
         palette.push({ 
+            index: i/2,
             red, 
             blue, 
             green,
-            pixelCount: 0
+            pixelCount: 0,
+            mostSimilar: null
         });
         
         //console.log(`Color index: ${colorIndex}; red: ${red}, blue: ${blue}, green: ${green}`);
@@ -204,6 +206,29 @@ const loadPalette = (byteArrayPalette, palette) => {
         ctxPalette.fillRect(colorIndex * 32, 32, 32, 32);
 
         colorIndex++;
+    }
+
+    // find replacement color of each color (most similar)
+    for(let i=0; i<16; i++) {
+        let currentMostSimilarIndex = null;
+        let currentMostSimilarDistance = null;
+        for(let j=0; j<16; j++) {
+            if(j != i) {
+                // euclidean distance (no need to square root, as it is only for comparison between distances)
+                let distance = 
+                    ((palette[i].red - palette[j].red) ** 2) +
+                    ((palette[i].green - palette[j].green) ** 2) +
+                    ((palette[i].blue - palette[j].blue) ** 2);
+                    
+                if(distance < currentMostSimilarDistance || currentMostSimilarDistance == null) {
+                    currentMostSimilarDistance = distance;
+                    currentMostSimilarIndex = j;
+                }
+                //console.log(distance);
+            }
+        }
+        palette[i].mostSimilar = currentMostSimilarIndex;
+        console.log(palette[i]);
     }
 };
 
