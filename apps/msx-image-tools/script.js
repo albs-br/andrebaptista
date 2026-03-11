@@ -298,10 +298,8 @@ const convertSC5toSprites = (xBase, yBase, transparentColor) => {
         console.log(strColor);
 
 
-        // TODO: do color substitutions for closest color
-
         colors_0[line] = colorsCount[0].index;
-        colors_1[line] = (colorsCount[1].count > 0) ? colorsCount[1].index : null;
+        colors_1[line] = (colorsCount[1].count > 0) ? colorsCount[1].index : colorsCount[0].index;
 
         patterns_0[line] = "";
         patterns_1[line] = "";
@@ -315,33 +313,25 @@ const convertSC5toSprites = (xBase, yBase, transparentColor) => {
                 patterns_0[line] += "1";
                 patterns_1[line] += "0";
             }
+            else if(color == colors_1[line]) { 
+                patterns_0[line] += "0";
+                patterns_1[line] += "1";
+            }
             else {
-                if(color == colors_1[line]) { 
+                // Change this color by the most similar (between color 0 and 1)
+                
+                const distToColor0 = distanceBetweenTwoColors(palette[color], palette[colors_0[line]]);
+                const distToColor1 = distanceBetweenTwoColors(palette[color], palette[colors_1[line]]);
+
+                if(distToColor1 < distToColor0) {
                     patterns_0[line] += "0";
                     patterns_1[line] += "1";
                 }
                 else {
-                    // Change this color by the most similar (between color 0 and 1)
-                   
-                    const distToColor0 = distanceBetweenTwoColors(palette[color], palette[colors_0[line]]);
-                    const distToColor1 = distanceBetweenTwoColors(palette[color], palette[colors_1[line]]);
-
-                    if(distToColor1 < distToColor0) {
-                        patterns_0[line] += "0";
-                        patterns_1[line] += "1";
-                    }
-                    else {
-                        patterns_0[line] += "1";
-                        patterns_1[line] += "0";
-                    }
+                    patterns_0[line] += "1";
+                    patterns_1[line] += "0";
                 }
             }
-            
-            // if(color != transparentColor && 
-            //    color != colors_0[line] && 
-            //    color != colors_1[line]) {
-            //     console.log("color missing: " + color);
-            // }
         }
         console.log(`${patterns_0[line]} ${colors_0[line]}`);
         console.log(`${patterns_1[line]} ${colors_1[line]}`);
@@ -352,6 +342,36 @@ const convertSC5toSprites = (xBase, yBase, transparentColor) => {
 
     drawSprite();
 
+    // write sprite src code to textarea
+    let txt = "";
+    const newLine = "&#13;&#10";
+    
+    txt += ` ; Pattern 0` + newLine;
+    for(let i=0; i<16; i++) {
+        txt += `\tdb\t${patterns_0[i].substring(0, 8)}` + newLine;
+    }
+    for(let i=0; i<16; i++) {
+        txt += `\tdb\t${patterns_0[i].substring(8, 16)}` + newLine;
+    }
+
+    txt += ` ; Pattern 1` + newLine;
+    for(let i=0; i<16; i++) {
+        txt += `\tdb\t${patterns_1[i].substring(0, 8)}` + newLine;
+    }
+    for(let i=0; i<16; i++) {
+        txt += `\tdb\t${patterns_1[i].substring(8, 16)}` + newLine;
+    }
+    
+    txt += ` ; Color 0` + newLine;
+    for(let i=0; i<16; i++) {
+        txt += `\tdb\t${colors_0[i]}` + newLine;
+    }
+    txt += ` ; Color 1` + newLine;
+    for(let i=0; i<16; i++) {
+        txt += `\tdb\t${colors_1[i]}` + newLine;
+    }
+
+    outputSprites.innerHTML = txt;
 };
 
 const reset = () => {

@@ -25,3 +25,20 @@ h1 {
 .divCmd {
     padding: 20px;
 }
+
+/* divs side by side */
+.flex-container {
+  display: flex; /* Makes the child divs flex items */
+  gap: 0px; /* Adds space between the divs */
+}
+
+.box {
+  flex: 1; /* Divs will share available space equally */
+  /* Add other styling like background, padding, etc. */
+  padding: 0px;
+}
+
+/* .box2 {
+  flex: 1;
+  padding: 10px;
+} */
