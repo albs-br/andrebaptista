@@ -113,7 +113,7 @@ const drawSprite = () => {
     const zoom = 2;
 
     ctxSprite.fillStyle = "white";
-    ctxSprite.fillRect(0, 0, 31, 31);
+    ctxSprite.fillRect(0, 0, 16 * zoom, 16 * zoom);
 
     if(patterns_0 && colors_0) {
         for(let y=0; y<16; y++) {
@@ -208,6 +208,7 @@ const loadPalette = (byteArrayPalette, palette) => {
         colorIndex++;
     }
 
+
     // find replacement color of each color (most similar)
     for(let i=0; i<16; i++) {
         let currentMostSimilarIndex = null;
@@ -215,10 +216,7 @@ const loadPalette = (byteArrayPalette, palette) => {
         for(let j=0; j<16; j++) {
             if(j != i) {
                 // euclidean distance (no need to square root, as it is only for comparison between distances)
-                let distance = 
-                    ((palette[i].red - palette[j].red) ** 2) +
-                    ((palette[i].green - palette[j].green) ** 2) +
-                    ((palette[i].blue - palette[j].blue) ** 2);
+                let distance = distanceBetweenTwoColors(palette[i], palette[j]);
                     
                 if(distance < currentMostSimilarDistance || currentMostSimilarDistance == null) {
                     currentMostSimilarDistance = distance;
@@ -230,6 +228,20 @@ const loadPalette = (byteArrayPalette, palette) => {
         palette[i].mostSimilar = currentMostSimilarIndex;
         console.log(palette[i]);
     }
+};
+
+const distanceBetweenTwoColors = (color1, color2) => {
+    // Weights based on SC8 pixel format (gggrrrbb)
+    const weightRed = 3;
+    const weightGreen = 3;
+    const weightBlue = 2;
+
+    let distance = 
+        (((color1.red   - color2.red) * weightRed) ** 2) +
+        (((color1.green - color2.green) * weightGreen) ** 2) +
+        (((color1.blue  - color2.blue) * weightBlue) ** 2);
+
+    return distance;
 };
 
 const saveFile = async (blob, suggestedName) => {
@@ -260,6 +272,7 @@ let colors_1 = [];
 
 // Convert a 32x32 area of a SC5 image to sprites (two layers, 8 sprites of size 16x16)
 const convertSC5toSprites = (xBase, yBase, transparentColor) => {
+
     let colorsCount = [];
     let line = 0;
     for(let y=yBase; y < yBase + 16; y++) {
@@ -294,19 +307,41 @@ const convertSC5toSprites = (xBase, yBase, transparentColor) => {
         patterns_1[line] = "";
         for(let x=xBase; x < xBase + 16; x++) {
             const color = parseInt(pixels[(y*256) + x]);
-            if(color == colors_0[line]) { 
+            if(color == transparentColor) {
+                patterns_0[line] += "0";
+                patterns_1[line] += "0";
+            }
+            else if(color == colors_0[line]) { 
                 patterns_0[line] += "1";
                 patterns_1[line] += "0";
             }
             else {
-                patterns_0[line] += "0";
                 if(color == colors_1[line]) { 
+                    patterns_0[line] += "0";
                     patterns_1[line] += "1";
                 }
                 else {
-                    patterns_1[line] += "0";
+                    // Change this color by the most similar (between color 0 and 1)
+                   
+                    const distToColor0 = distanceBetweenTwoColors(palette[color], palette[colors_0[line]]);
+                    const distToColor1 = distanceBetweenTwoColors(palette[color], palette[colors_1[line]]);
+
+                    if(distToColor1 < distToColor0) {
+                        patterns_0[line] += "0";
+                        patterns_1[line] += "1";
+                    }
+                    else {
+                        patterns_0[line] += "1";
+                        patterns_1[line] += "0";
+                    }
                 }
             }
+            
+            // if(color != transparentColor && 
+            //    color != colors_0[line] && 
+            //    color != colors_1[line]) {
+            //     console.log("color missing: " + color);
+            // }
         }
         console.log(`${patterns_0[line]} ${colors_0[line]}`);
         console.log(`${patterns_1[line]} ${colors_1[line]}`);
