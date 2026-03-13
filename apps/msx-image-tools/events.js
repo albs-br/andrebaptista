@@ -16,7 +16,8 @@ const div_Cmd_ConvertToSprites = document.getElementById("div_Cmd_ConvertToSprit
 const txt_ConvertToSprites_X = document.getElementById("txt_ConvertToSprites_X");
 const txt_ConvertToSprites_Y = document.getElementById("txt_ConvertToSprites_Y");
 const combo_ConvertToSprites_TransparentColor = document.getElementById("combo_ConvertToSprites_TransparentColor");
-const outputSprites = document.getElementById("outputSprites");
+const outputSprites_Patterns = document.getElementById("outputSprites_Patterns");
+const outputSprites_Colors = document.getElementById("outputSprites_Colors");
 
 const btnReset = document.getElementById("btnReset");
 

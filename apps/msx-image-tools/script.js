@@ -272,6 +272,16 @@ let colors_1 = [];
 
 // Convert a 32x32 area of a SC5 image to sprites (two layers, 8 sprites of size 16x16)
 const convertSC5toSprites = (xBase, yBase, transparentColor) => {
+    outputSprites_Patterns.innerHTML = "";
+    outputSprites_Colors.innerHTML = "";
+
+    convertSC5toSprites_16x16(xBase, yBase, transparentColor);
+    convertSC5toSprites_16x16(xBase, yBase + 16, transparentColor);
+    convertSC5toSprites_16x16(xBase + 16, yBase, transparentColor);
+    convertSC5toSprites_16x16(xBase + 16, yBase + 16, transparentColor);
+};
+
+const convertSC5toSprites_16x16 = (xBase, yBase, transparentColor) => {
 
     let colorsCount = [];
     let line = 0;
@@ -343,35 +353,37 @@ const convertSC5toSprites = (xBase, yBase, transparentColor) => {
     drawSprite();
 
     // write sprite src code to textarea
-    let txt = "";
+    let txtPatterns = "";
+    let txtColors = "";
     const newLine = "&#13;&#10";
     
-    txt += ` ; Pattern 0` + newLine;
+    txtPatterns += ` ; Pattern 0` + newLine;
     for(let i=0; i<16; i++) {
-        txt += `\tdb\t${patterns_0[i].substring(0, 8)}` + newLine;
+        txtPatterns += `\tdb\t${patterns_0[i].substring(0, 8)} b` + newLine;
     }
     for(let i=0; i<16; i++) {
-        txt += `\tdb\t${patterns_0[i].substring(8, 16)}` + newLine;
+        txtPatterns += `\tdb\t${patterns_0[i].substring(8, 16)} b` + newLine;
     }
 
-    txt += ` ; Pattern 1` + newLine;
+    txtPatterns += ` ; Pattern 1` + newLine;
     for(let i=0; i<16; i++) {
-        txt += `\tdb\t${patterns_1[i].substring(0, 8)}` + newLine;
+        txtPatterns += `\tdb\t${patterns_1[i].substring(0, 8)} b` + newLine;
     }
     for(let i=0; i<16; i++) {
-        txt += `\tdb\t${patterns_1[i].substring(8, 16)}` + newLine;
+        txtPatterns += `\tdb\t${patterns_1[i].substring(8, 16)} b` + newLine;
     }
     
-    txt += ` ; Color 0` + newLine;
+    txtColors += ` ; Color 0` + newLine;
     for(let i=0; i<16; i++) {
-        txt += `\tdb\t${colors_0[i]}` + newLine;
+        txtColors += `\tdb\t${colors_0[i]}` + newLine;
     }
-    txt += ` ; Color 1` + newLine;
+    txtColors += ` ; Color 1` + newLine;
     for(let i=0; i<16; i++) {
-        txt += `\tdb\t${colors_1[i]}` + newLine;
+        txtColors += `\tdb\t${colors_1[i]}` + newLine;
     }
 
-    outputSprites.innerHTML = txt;
+    outputSprites_Patterns.innerHTML += txtPatterns;
+    outputSprites_Colors.innerHTML += txtColors;
 };
 
 const reset = () => {
