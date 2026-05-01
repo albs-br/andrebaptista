@@ -43,6 +43,9 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   padding-top: 75%;
 }
 
+.question-answer {
+  padding-left: 30px;
+}
 /*
 .msx-book {
   display: block;
